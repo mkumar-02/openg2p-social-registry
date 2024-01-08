@@ -1,0 +1,3 @@
+git+https://github.com/OpenG2P/openg2p-social-registry@17.0-develop#subdirectory=setup/g2p_dci_api_server
+git+https://github.com/OpenG2P/openg2p-social-registry@17.0-develop#subdirectory=setup/g2p_oauth
+git+https://github.com/OpenG2P/openg2p-social-registry@17.0-develop#subdirectory=setup/g2p_social_registry
