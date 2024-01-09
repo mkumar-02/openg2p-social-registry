@@ -1,0 +1,25 @@
+# Part of OpenG2P Social Registry. See LICENSE file for full copyright and licensing details.
+{
+    "name": "OpenG2P API: DCI Server",
+    "summary": "RESTful API routes for OpenG2P",
+    "category": "G2P",
+    "version": "17.0.1.0.0",
+    "author": "OpenG2P",
+    "development_status": "Alpha",
+    "external_dependencies": {"python": ["PyLD", "pyjwt>=2.4.0", "graphene"]},
+    "website": "https://openg2p.org",
+    "license": "Other OSI approved licence",
+    "depends": [
+        "base",
+        "g2p_registry_base",
+        "g2p_registry_individual",
+        "g2p_oauth"
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/client_credentials_view.xml",
+    ],
+    "application": True,
+    "auto_install": False,
+    "installable": True,
+}
