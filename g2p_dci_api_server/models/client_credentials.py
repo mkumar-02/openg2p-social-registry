@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from odoo.addons.g2p_oauth.tools import calculate_signature
+from ..tools.rsa_encode_decode import calculate_signature
 
 
 class ClientCredential(models.Model):

@@ -10,11 +10,11 @@ from odoo.osv.expression import AND
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
-from odoo.addons.g2p_oauth.tools import verify_and_decode_signature
 from odoo.addons.graphql_base import GraphQLControllerMixin
 
 from ..tools import constants
-from ..schema import schema
+from ..tools.rsa_encode_decode import verify_and_decode_signature
+
 
 def setup_db(req, db_name):
     if not db_name:
@@ -44,9 +44,7 @@ def error_wrapper(code, message):
 
 
 def get_auth_header(headers, raise_exception=False):
-    auth_header = (
-        headers.get("Authorization") or headers.get("authorization")
-    )
+    auth_header = headers.get("Authorization") or headers.get("authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         if raise_exception:
             error = {
@@ -57,7 +55,7 @@ def get_auth_header(headers, raise_exception=False):
     return auth_header
 
 
-class G2PDciApiServer(http.Controller):
+class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
     @http.route(
         constants.OAUTH2_ENDPOINT,
         auth="none",
@@ -80,7 +78,7 @@ class G2PDciApiServer(http.Controller):
                     "error_description": "data must be in JSON format.",
                 },
             )
-        
+
         client_id = data.get("client_id", "")
         client_secret = data.get("client_secret", "")
         grant_type = data.get("grant_type", "")
@@ -331,10 +329,3 @@ class G2PDciApiServer(http.Controller):
                         }
                     )
         return search_responses
-
-
-class GraphQLController(http.Controller, GraphQLControllerMixin):
-
-    @http.route("/graphql/partner", auth="user", csrf=False)
-    def graphql(self, **kwargs):
-        return self._handle_graphql_request(schema.graphql_schema)
