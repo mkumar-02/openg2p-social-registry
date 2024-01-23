@@ -6,12 +6,12 @@ import werkzeug.wrappers
 
 from odoo import http
 from odoo.http import request
-from odoo.osv.expression import AND
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
 from odoo.addons.graphql_base import GraphQLControllerMixin
 
+from ..schema import schema
 from ..tools import constants
 from ..tools.rsa_encode_decode import verify_and_decode_signature
 
@@ -212,57 +212,21 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
 
         return None
 
-    def process_queries(self, query_type, queries, domain):
+    def process_queries(self, query_type, queries, graphql_schema):
         for query in queries:
-            if query_type == constants.PREDICATE:
+
+            if query_type == constants.GRAPHQL:
                 query_error = self.check_content(query, "query", ["expression1"])
                 if query_error:
                     return error_wrapper(
                         query_error.get("code"), query_error.get("message")
                     )
-
                 expression = query.get("expression1")
-                expression_error = self.check_content(
-                    expression,
-                    "expression1",
-                    ["attribute_name", "operator", "attribute_value"],
-                )
-                if expression_error:
-                    return error_wrapper(
-                        expression_error.get("code"),
-                        expression_error.get("message"),
-                    )
-
-                attribute_name = expression.get("attribute_name")
-                if attribute_name not in constants.FIELD_MAPPING:
-                    return error_wrapper(
-                        400,
-                        f"These are the only supported attribute name: {', '.join(constants.FIELD_MAPPING.keys())}",
-                    )
-
-                operator = expression.get("operator")
-                if operator not in constants.OPERATION_MAPPING:
-                    return error_wrapper(
-                        400,
-                        f"These are the only supported operator: {', '.join(constants.OPERATION_MAPPING.keys())}",
-                    )
-
-                attribute_value = expression.get("attribute_value")
-
-                domain = AND(
-                    [
-                        domain,
-                        [
-                            (
-                                constants.FIELD_MAPPING[attribute_name],
-                                constants.OPERATION_MAPPING[operator],
-                                attribute_value,
-                            )
-                        ],
-                    ]
+                response = self._process_request(
+                    graphql_schema, data={"query": expression}
                 )
 
-        return domain
+                return json.loads(response.data)["data"]
 
     def process_search_requests(
         self, search_requests, today_isoformat, search_responses
@@ -302,30 +266,23 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
             reference_id = req.get("reference_id")
             queries = search_criteria.get("query")
 
-            domain = [("is_registrant", "=", True)]
+            # Process Queries
+            query_result = self.process_queries(
+                query_type, queries, schema.graphql_schema
+            )
 
-            if reg_type == constants.INDIVIDUAL:
-                domain.append(("is_group", "=", False))
-            else:
-                domain.append(("is_group", "=", True))
-
-            # Process Queries and modify domain
-            self.process_queries(query_type, queries, domain)
-
-            if domain:
-                records = http.request.env["res.partner"].sudo().search(domain)
-                if records:
-                    search_responses.append(
-                        {
-                            "reference_id": reference_id,
-                            "timestamp": today_isoformat,
-                            "status": "succ",
-                            "data": {
-                                "reg_record_type": "person",
-                                "reg_type": reg_type,
-                                "reg_records": records.get_dci_individual_registry_data(),
-                            },
-                            "locale": "eng",
-                        }
-                    )
+            if query_result:
+                search_responses.append(
+                    {
+                        "reference_id": reference_id,
+                        "timestamp": today_isoformat,
+                        "status": "succ",
+                        "data": {
+                            "reg_record_type": "person",
+                            "reg_type": reg_type,
+                            "reg_records": query_result,
+                        },
+                        "locale": "eng",
+                    }
+                )
         return search_responses
