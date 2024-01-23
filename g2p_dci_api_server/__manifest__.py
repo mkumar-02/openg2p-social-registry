@@ -9,7 +9,7 @@
     "external_dependencies": {"python": ["PyLD", "pyjwt>=2.4.0", "graphene"]},
     "website": "https://openg2p.org",
     "license": "Other OSI approved licence",
-    "depends": ["base", "g2p_registry_base", "g2p_registry_individual"],
+    "depends": ["base", "g2p_registry_base", "g2p_registry_individual", "g2p_oauth"],
     "data": [
         "security/ir.model.access.csv",
         "views/client_credentials_view.xml",

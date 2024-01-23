@@ -9,11 +9,11 @@ from odoo.http import request
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
+from odoo.addons.g2p_oauth.tools import verify_and_decode_signature
 from odoo.addons.graphql_base import GraphQLControllerMixin
 
 from ..schema import schema
 from ..tools import constants
-from ..tools.rsa_encode_decode import verify_and_decode_signature
 
 
 def setup_db(req, db_name):
