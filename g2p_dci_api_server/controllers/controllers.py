@@ -3,8 +3,10 @@ import uuid
 from datetime import datetime, timezone
 
 import werkzeug.wrappers
+from fastapi import APIRouter
+from fastapi.logger import logger
 
-from odoo import http
+from odoo import fields, http, models
 from odoo.http import request
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
@@ -14,6 +16,24 @@ from odoo.addons.graphql_base import GraphQLControllerMixin
 
 from ..schema import schema
 from ..tools import constants
+
+
+class TestFastapiEndpoint(models.Model):
+
+    _inherit = "fastapi.endpoint"
+
+    app: str = fields.Selection(
+        selection_add=[("social_registry", "Social Registry Endpoint")],
+        ondelete={"social_registry": "cascade"},
+    )
+
+    def _get_fastapi_routers(self):
+        if self.app == "social_registry":
+            return [social_registry_api_router]
+        return super()._get_fastapi_routers()
+
+
+social_registry_api_router = APIRouter()
 
 
 def setup_db(req, db_name):
@@ -63,6 +83,7 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
         type="http",
         csrf=False,
     )
+    # @social_registry_api_router.post(constants.OAUTH2_ENDPOINT)
     def auth_get_access_token(self, **kw):
 
         req = request
@@ -126,12 +147,12 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
         type="http",
         csrf=False,
     )
+    # @social_registry_api_router.post(constants.SYNC_SEARCH_ENDPOINT)
     def retrieve_registry(self, **kw):
         auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
         access_token = (
             auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
         )
-
         verified, payload = verify_and_decode_signature(access_token)
 
         if not verified:
@@ -212,7 +233,7 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
 
         return None
 
-    def process_queries(self, query_type, queries, graphql_schema):
+    def process_queries(self, query_type, queries, graphql_schema, error=None):
         for query in queries:
 
             if query_type == constants.GRAPHQL:
@@ -226,7 +247,13 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
                     graphql_schema, data={"query": expression}
                 )
 
-                return json.loads(response.data)["data"]
+                response_error = json.loads(response.data).get("errors", "")
+                if response_error:
+                    logger.error("Error in the query result", response_error)
+                    error = True
+                    return error, response_error
+
+                return error, json.loads(response.data)["data"]
 
     def process_search_requests(
         self, search_requests, today_isoformat, search_responses
@@ -267,11 +294,11 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
             queries = search_criteria.get("query")
 
             # Process Queries
-            query_result = self.process_queries(
-                query_type, queries, schema.graphql_schema
+            error, query_result = self.process_queries(
+                query_type, queries, schema.graphql_schema, None
             )
 
-            if query_result:
+            if query_result and not error:
                 search_responses.append(
                     {
                         "reference_id": reference_id,
@@ -280,9 +307,10 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
                         "data": {
                             "reg_record_type": "person",
                             "reg_type": reg_type,
-                            "reg_records": query_result,
+                            "reg_record": query_result,
                         },
                         "locale": "eng",
                     }
                 )
+
         return search_responses

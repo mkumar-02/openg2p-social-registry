@@ -63,6 +63,6 @@ Contributors include:
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `OpenG2P/openg2p-social-registry <https://github.com/OpenG2P/openg2p-registry/tree/17.0-develop/g2p_social_registry>`_ project on GitHub.
+This module is part of the `OpenG2P/openg2p-social-registry <https://github.com/OpenG2P/openg2p-social-registry/tree/17.0-develop/g2p_social_registry>`_ project on GitHub.
 
 You are welcome to contribute.

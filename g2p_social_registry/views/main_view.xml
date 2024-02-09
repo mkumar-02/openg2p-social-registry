@@ -1,0 +1,10 @@
+<!--
+   Part of OpenG2P Social Registry. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+
+    <record model="ir.ui.menu" id="g2p_registry_base.g2p_main_menu_root">
+        <field name="name">Social Registry</field>
+    </record>
+
+</odoo>
