@@ -1,10 +1,10 @@
 import json
+import logging
 import uuid
 from datetime import datetime, timezone
 
 import werkzeug.wrappers
 from fastapi import APIRouter
-from fastapi.logger import logger
 
 from odoo import fields, http, models
 from odoo.http import request
@@ -16,6 +16,8 @@ from odoo.addons.graphql_base import GraphQLControllerMixin
 
 from ..schema import schema
 from ..tools import constants
+
+_logger = logging.getLogger(__name__)
 
 
 class TestFastapiEndpoint(models.Model):
@@ -249,7 +251,7 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
 
                 response_error = json.loads(response.data).get("errors", "")
                 if response_error:
-                    logger.error("Error in the query result", response_error)
+                    _logger.error("Error in the query result", response_error)
                     error = True
                     return error, response_error
 

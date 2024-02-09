@@ -27,17 +27,17 @@ class Partner(OdooObjectType):
 
 
 class Query(graphene.ObjectType):
-    all_partners = graphene.List(
+    get_registrants = graphene.List(
         Partner,
         required=True,
         limit=graphene.Int(),
         **{key: graphene.String() for key in Partner._meta.fields if key != "reg_ids"}
     )
 
-    total_partners = graphene.Int()
+    total_registrant_count = graphene.Int()
 
     @staticmethod
-    def resolve_all_partners(root, info, limit=None, **kwargs):
+    def resolve_get_registrants(root, info, limit=None, **kwargs):
         global count
         domain = [(("is_registrant", "=", True))]
         for key, value in kwargs.items():
@@ -49,7 +49,7 @@ class Query(graphene.ObjectType):
         return partners
 
     @staticmethod
-    def resolve_total_partners(root, info):
+    def resolve_total_registrant_count(root, info):
         return count
 
 
