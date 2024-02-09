@@ -14,7 +14,7 @@
         "g2p_registry_membership",
     ],
     "external_dependencies": {},
-    "data": [],
+    "data": ["views/main_view.xml"],
     "assets": {},
     "demo": [],
     "images": [],

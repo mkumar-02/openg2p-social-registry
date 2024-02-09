@@ -1,101 +1,56 @@
 import graphene
-
-from odoo import _
-from odoo.exceptions import UserError
+from graphene import List
 
 from odoo.addons.graphql_base import OdooObjectType
 
 
-class Country(OdooObjectType):
-    code = graphene.String(required=True)
-    name = graphene.String(required=True)
+class RegIds(OdooObjectType):
+    id_type_as_str = graphene.String(required=True)
+    value = graphene.String(required=True)
 
 
 class Partner(OdooObjectType):
     name = graphene.String(required=True)
-    street = graphene.String()
-    street2 = graphene.String()
-    city = graphene.String()
-    zip = graphene.String()
-    country = graphene.Field(Country)
+    given_name = graphene.String()
+    family_name = graphene.String()
+    addl_name = graphene.String()
+    registration_date = graphene.Date()
+    address = graphene.String()
     email = graphene.String()
-    phone = graphene.String()
-    is_company = graphene.Boolean(required=True)
-    contacts = graphene.List(graphene.NonNull(lambda: Partner), required=True)
-
-    @staticmethod
-    def resolve_country(root, info):
-        return root.country_id or None
-
-    @staticmethod
-    def resolve_contacts(root, info):
-        return root.child_ids
+    district = graphene.String()
+    birthplace = graphene.String()
+    birthdate = graphene.Date()
+    gender = graphene.String()
+    reg_ids = graphene.Field(List(RegIds))
+    phone_no = graphene.String()
+    is_group = graphene.Boolean(required=True)
 
 
 class Query(graphene.ObjectType):
-    all_partners = graphene.List(
-        graphene.NonNull(Partner),
+    get_registrants = graphene.List(
+        Partner,
         required=True,
-        companies_only=graphene.Boolean(),
         limit=graphene.Int(),
-        offset=graphene.Int(),
-        street=graphene.String(),
+        **{key: graphene.String() for key in Partner._meta.fields if key != "reg_ids"}
     )
 
-    reverse = graphene.String(
-        required=True,
-        description="Reverse a string",
-        word=graphene.String(required=True),
-    )
-
-    error_example = graphene.String()
+    total_registrant_count = graphene.Int()
 
     @staticmethod
-    def resolve_all_partners(
-        root, info, companies_only=False, limit=None, offset=None, street=None
-    ):
-        domain = []
-        if companies_only:
-            domain.append(("is_company", "=", True))
-        if street:
-            domain.append(("street", "=", street))
-        return (
-            info.context["env"]["res.partner"]
-            .sudo()
-            .search(domain, limit=limit, offset=offset)
-        )
+    def resolve_get_registrants(root, info, limit=None, **kwargs):
+        global count
+        domain = [(("is_registrant", "=", True))]
+        for key, value in kwargs.items():
+            if value is not None:
+                domain.append((key, "=", value))
+        partners = info.context["env"]["res.partner"].sudo().search(domain, limit=limit)
+
+        count = len(partners)
+        return partners
 
     @staticmethod
-    def resolve_reverse(root, info, word):
-        return word[::-1]
-
-    @staticmethod
-    def resolve_error_example(root, info):
-        raise UserError(_("UserError example"))
+    def resolve_total_registrant_count(root, info):
+        return count
 
 
-class CreatePartner(graphene.Mutation):
-    class Arguments:
-        name = graphene.String(required=True)
-        email = graphene.String(required=True)
-        is_company = graphene.Boolean()
-        raise_after_create = graphene.Boolean()
-
-    Output = Partner
-
-    @staticmethod
-    def mutate(self, info, name, email, is_company=False, raise_after_create=False):
-        env = info.context["env"]
-        partner = env["res.partner"].create(
-            {"name": name, "email": email, "is_company": is_company}
-        )
-        if raise_after_create:
-            raise UserError(_("as requested"))
-        return partner
-
-
-class Mutation(graphene.ObjectType):
-    create_partner = CreatePartner.Field(description="Documentation of CreatePartner")
-
-
-schema = graphene.Schema(query=Query, mutation=Mutation)
+schema = graphene.Schema(query=Query, mutation=None)
