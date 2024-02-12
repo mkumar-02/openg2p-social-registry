@@ -3,14 +3,13 @@ import logging
 import uuid
 from datetime import datetime, timezone
 
-import jwt
 import requests
 import werkzeug.wrappers
 from fastapi import APIRouter
+from jose import jwt
 
 from odoo import fields, http, models
 from odoo.http import request
-from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
 from odoo.addons.graphql_base import GraphQLControllerMixin
@@ -38,9 +37,7 @@ class TestFastapiEndpoint(models.Model):
 
 social_registry_api_router = APIRouter()
 
-JWT_ALGORITHM = "RS256"
-
-cache_jwks = []
+cache_jwks = {}
 
 
 def verify_and_decode_signature(token, iss_uri, jwks_uri):
@@ -48,24 +45,19 @@ def verify_and_decode_signature(token, iss_uri, jwks_uri):
         if not cache_jwks:
             jwks_res = requests.get(jwks_uri)
             jwks_res.raise_for_status()
-            cache_jwks.append(jwks_res.json())
-        return True, jwt.decode(token, cache_jwks, algorithms=[JWT_ALGORITHM])
+            cache_jwks.update(jwks_res.json())
+
+        return True, jwt.decode(
+            token,
+            cache_jwks,
+            options={
+                "verify_aud": False,
+                "verify_iss": False,
+                "verify_sub": False,
+            },
+        )
     except Exception as e:
         return False, str(e)
-
-
-def setup_db(req, db_name):
-    if not db_name:
-        return 400, {
-            "error": "Bad Request",
-            "error_description": "db_name is required.",
-        }
-
-    if db_name not in list_dbs(force=True):
-        return 404, {"error": "Not Found", "error_description": "DB not found."}
-
-    request.session.db = db_name
-    return 200, None
 
 
 def response_wrapper(status, data):
@@ -104,17 +96,15 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
     # @social_registry_api_router.post(constants.SYNC_SEARCH_ENDPOINT)
     def retrieve_registry(self, **kw):
         auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
-        access_token = (
-            auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
-        )
+        access_token = auth_header.replace("Bearer ", "").replace("\\n", "")
 
         iss_uri = (
-            self.env["ir.config_parameter"]
+            request.env["ir.config_parameter"]
             .sudo()
             .get_param("g2p_social_registry_auth_iss", "")
         )
         jwks_uri = (
-            self.env["ir.config_parameter"]
+            request.env["ir.config_parameter"]
             .sudo()
             .get_param("g2p_social_registry_auth_jwks_uri", "")
         )
@@ -123,11 +113,6 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
         if not verified:
             return error_wrapper(401, "Invalid Access Token.")
 
-        req = http.request
-        db_name = payload.get("db_name")
-        status_code, error_message = setup_db(req, db_name)
-        if error_message:
-            return error_wrapper(status_code, error_message["error_description"])
         req = http.request
 
         data = req.httprequest.data or "{}"

@@ -16,10 +16,9 @@
         "graphql_base",
     ],
     "data": [
-        "security/ir.model.access.csv",
         "data/ir_config_params.xml",
     ],
-    "external_dependencies": {"python": ["PyLD", "pyjwt>=2.4.0"]},
+    "external_dependencies": {"python": ["PyLD", "python-jose"]},
     "application": True,
     "auto_install": False,
     "installable": True,
