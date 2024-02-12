@@ -1,12 +1,13 @@
 import json
 import logging
 import uuid
-from datetime import datetime, timezone
-
-import jwt
 import requests
 import werkzeug.wrappers
+
+from datetime import datetime, timezone
+
 from fastapi import APIRouter
+from jose import jwt
 
 from odoo import fields, http, models
 from odoo.http import request
@@ -38,8 +39,6 @@ class TestFastapiEndpoint(models.Model):
 
 social_registry_api_router = APIRouter()
 
-JWT_ALGORITHM = "RS256"
-
 cache_jwks = []
 
 
@@ -49,7 +48,12 @@ def verify_and_decode_signature(token, iss_uri, jwks_uri):
             jwks_res = requests.get(jwks_uri)
             jwks_res.raise_for_status()
             cache_jwks.append(jwks_res.json())
-        return True, jwt.decode(token, cache_jwks, algorithms=[JWT_ALGORITHM])
+             
+        return True, jwt.decode(token, cache_jwks, options={
+                        "verify_aud": False,
+                        "verify_iss": False,
+                        "verify_sub": False,
+                    },)
     except Exception as e:
         return False, str(e)
 
@@ -105,21 +109,21 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
     def retrieve_registry(self, **kw):
         auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
         access_token = (
-            auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
+            auth_header.replace("Bearer ", "").replace("\\n", "")
         )
 
         iss_uri = (
-            self.env["ir.config_parameter"]
+            request.env["ir.config_parameter"]
             .sudo()
             .get_param("g2p_social_registry_auth_iss", "")
         )
         jwks_uri = (
-            self.env["ir.config_parameter"]
+            request.env["ir.config_parameter"]
             .sudo()
             .get_param("g2p_social_registry_auth_jwks_uri", "")
         )
         verified, payload = verify_and_decode_signature(access_token, iss_uri, jwks_uri)
-
+        
         if not verified:
             return error_wrapper(401, "Invalid Access Token.")
 
