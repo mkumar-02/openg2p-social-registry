@@ -3,6 +3,8 @@ import logging
 import uuid
 from datetime import datetime, timezone
 
+import jwt
+import requests
 import werkzeug.wrappers
 from fastapi import APIRouter
 
@@ -11,7 +13,6 @@ from odoo.http import request
 from odoo.service.db import list_dbs
 from odoo.tools import date_utils
 
-from odoo.addons.g2p_oauth.tools import verify_and_decode_signature
 from odoo.addons.graphql_base import GraphQLControllerMixin
 
 from ..schema import schema
@@ -36,6 +37,21 @@ class TestFastapiEndpoint(models.Model):
 
 
 social_registry_api_router = APIRouter()
+
+JWT_ALGORITHM = "RS256"
+
+cache_jwks = []
+
+
+def verify_and_decode_signature(token, iss_uri, jwks_uri):
+    try:
+        if not cache_jwks:
+            jwks_res = requests.get(jwks_uri)
+            jwks_res.raise_for_status()
+            cache_jwks.append(jwks_res.json())
+        return True, jwt.decode(token, cache_jwks, algorithms=[JWT_ALGORITHM])
+    except Exception as e:
+        return False, str(e)
 
 
 def setup_db(req, db_name):
@@ -79,70 +95,6 @@ def get_auth_header(headers, raise_exception=False):
 
 class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
     @http.route(
-        constants.OAUTH2_ENDPOINT,
-        auth="none",
-        methods=["POST"],
-        type="http",
-        csrf=False,
-    )
-    # @social_registry_api_router.post(constants.OAUTH2_ENDPOINT)
-    def auth_get_access_token(self, **kw):
-
-        req = request
-
-        data = req.httprequest.data or "{}"
-        try:
-            data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            return response_wrapper(
-                400,
-                {
-                    "error": "Bad Request",
-                    "error_description": "data must be in JSON format.",
-                },
-            )
-
-        client_id = data.get("client_id", "")
-        client_secret = data.get("client_secret", "")
-        grant_type = data.get("grant_type", "")
-        db_name = data.get("db_name", "")
-
-        status_code, error_message = setup_db(req, db_name)
-        if error_message:
-            return response_wrapper(status_code, error_message)
-
-        req = http.request
-
-        if not all([client_id, client_secret, grant_type]):
-            error = {
-                "error": "Bad Request",
-                "error_description": "client_id, client_secret, and grant_type is required.",
-            }
-            return response_wrapper(400, error)
-
-        client = (
-            req.env["g2p.dci.api.client.credential"]
-            .sudo()
-            .search(
-                [("client_id", "=", client_id), ("client_secret", "=", client_secret)],
-                limit=1,
-            )
-        )
-
-        if not client:
-            error = {
-                "error": "Unauthorized",
-                "error_description": "Invalid client id or secret.",
-            }
-            return response_wrapper(401, error)
-        access_token = client.generate_access_token(db_name)
-        data = {
-            "access_token": access_token,
-            "token_type": "Bearer",
-        }
-        return response_wrapper(200, data)
-
-    @http.route(
         constants.SYNC_SEARCH_ENDPOINT,
         auth="none",
         methods=["POST"],
@@ -155,7 +107,18 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
         access_token = (
             auth_header.replace("Bearer ", "").replace("\\n", "").encode("utf-8")
         )
-        verified, payload = verify_and_decode_signature(access_token)
+
+        iss_uri = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("g2p_social_registry_auth_iss", "")
+        )
+        jwks_uri = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("g2p_social_registry_auth_jwks_uri", "")
+        )
+        verified, payload = verify_and_decode_signature(access_token, iss_uri, jwks_uri)
 
         if not verified:
             return error_wrapper(401, "Invalid Access Token.")
