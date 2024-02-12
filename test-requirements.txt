@@ -1,3 +1,6 @@
-git+https://github.com/OpenG2P/openg2p-social-registry@17.0-develop#subdirectory=setup/g2p_dci_api_server
-git+https://github.com/OpenG2P/openg2p-social-registry@17.0-develop#subdirectory=setup/g2p_oauth
-git+https://github.com/OpenG2P/openg2p-social-registry@17.0-develop#subdirectory=setup/g2p_social_registry
+git+https://github.com/OpenG2P/rest-framework@17.0#subdirectory=setup/fastapi
+git+https://github.com/OpenG2P/rest-framework@17.0#subdirectory=setup/graphql_base
+git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=setup/g2p_registry_base
+git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=setup/g2p_registry_individual
+git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=setup/g2p_registry_group
+git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=setup/g2p_registry_membership
