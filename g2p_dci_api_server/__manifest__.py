@@ -18,7 +18,7 @@
     "data": [
         "data/ir_config_params.xml",
     ],
-    "external_dependencies": {"python": ["PyLD", "python-jose"]},
+    "external_dependencies": {"python": ["python-jose"]},
     "application": True,
     "auto_install": False,
     "installable": True,
