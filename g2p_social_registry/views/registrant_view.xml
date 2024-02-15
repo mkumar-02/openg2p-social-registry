@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Individual view -->
+    <record id="view_g2p_social_registry_individual_region" model="ir.ui.view">
+        <field name="name">g2p.social.registry.individual.region</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='district']" position="after">
+                <field name="region" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Group view -->
+    <record id="view_g2p_social_registry_group_region" model="ir.ui.view">
+        <field name="name">g2p.social.registry.group.region</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='address']" position="after">
+                    <field name="region" />
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

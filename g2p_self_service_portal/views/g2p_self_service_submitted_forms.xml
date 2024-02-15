@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template id="self_service_form_submitted" name="G2P Self Service Form Submitted">
+        <t t-call="g2p_self_service_portal.base">
+
+            <div id="wrap" class="oe_structure oe_empty" />
+            <div class="form-template">
+                <div class="main-container">
+                    <div class="container-adjuster">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb form-layout-breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/selfservice/apply">Home</a></li>
+
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            Application submission
+                                        </li>
+                                    </ol>
+                                </nav>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-8 submit-message">
+                                <div class="card container-left" style="width: auto; padding: 0px;">
+                                    <div class="card-body" style="padding: 20px;">
+                                        <h5 class="user-name">Dear <t t-esc="user" />,</h5>
+                                        <p class="thank-you-msg">
+                                            Thank you for submitting the form to update your demographic information in the Social Registry.
+                                            We greatly appreciate your initiative in keeping your details current. Your request is now in our system and will undergo review by our team.
+                                            <br /><br />
+                                            Should we require any additional information to process your request, we will contact you using the email or phone number provided in your application.
+                                            Therefore, please ensure that you regularly check your email and phone for any communication from our team to avoid delays.
+                                            <br /><br />
+                                            Thank you again for entrusting us with your information. We wish you the best of luck in all your future endeavors.
+                                            <br /><br />
+                                            Best regards,
+                                            <br />
+                                            Registry Team
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+   </template>
+</odoo>

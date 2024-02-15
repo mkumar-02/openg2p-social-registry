@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- <record id="g2p_registry_base.model_res_partner" model="ir.model">
+      <field name="website_form_key">update_registry_data</field>
+      <field name="website_form_default_field_id" ref="g2p_registry_base.field_res_partner__is_registrant" />
+      <field name="website_form_access">True</field>
+      <field name="website_form_label">Update Registry Data</field>
+
+
+      <field name="website_form_key">send_mail</field>
+      <field name="website_form_default_field_id" ref="mail.field_mail_mail__body_html" />
+      <field name="website_form_access">True</field>
+      <field name="website_form_label">test</field>
+    </record> -->
+
+    <record id="g2p_registry_base.model_res_partner" model="ir.model">
+      <field name="website_form_key">send_mail</field>
+      <field name="website_form_default_field_id" ref="g2p_registry_base.field_res_partner__is_registrant" />
+      <field name="website_form_access">True</field>
+      <field name="website_form_label">Update Registry Data</field>
+    </record>
+
+</odoo>
