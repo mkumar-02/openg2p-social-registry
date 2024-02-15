@@ -24,7 +24,6 @@ class Partner(OdooObjectType):
     reg_ids = graphene.Field(List(RegIds))
     phone_no = graphene.String()
     is_group = graphene.Boolean(required=True)
-    income = graphene.Int()
 
 
 class Query(graphene.ObjectType):
