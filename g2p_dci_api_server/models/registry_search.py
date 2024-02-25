@@ -7,8 +7,7 @@ from .header import Header, ResponseHeader
 
 
 class QueryRequest(BaseModel):
-    type: str = ""
-    value: str = ""
+    expression: str
 
 
 class SearchCriteriaRequest(BaseModel):
@@ -16,7 +15,7 @@ class SearchCriteriaRequest(BaseModel):
     reg_type: str = ""
     reg_event_type: str = ""
     query_type: str = ""
-    query: QueryRequest
+    query: str
 
 
 class SingleSearchRequest(BaseModel):
@@ -42,7 +41,7 @@ class QueryDataResponse(BaseModel):
     reg_type: str
     reg_event_type: str
     reg_record_type: str
-    reg_records: Optional[dict] = {}
+    reg_record: Optional[dict] = {}
 
 
 class SingleSearchResponse(BaseModel):

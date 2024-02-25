@@ -16,7 +16,9 @@
         "graphql_base",
     ],
     "data": [
-        "data/ir_config_params.xml",
+        # "data/ir_config_params.xml",
+        "data/social_registry_endpoint_data.xml",
+        "views/res_config_view.xml",
     ],
     "external_dependencies": {"python": ["python-jose"]},
     "application": True,

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="socialregistry_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">socialregistry.res.config.settings.view.inherit.setup</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="999" />
+        <field name="inherit_id" ref="g2p_registry_base.openg2p_inherit_res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/app[@name='g2p_config_settings']" position="inside">
+
+                    <block title="API Server Settings">
+                        <setting string="Auth Issuer" help="Set up auth issuer for Social Registry">
+                            <field name="g2p_social_registry_auth_iss" />
+                        </setting>
+                         <setting string="Auth JWKs URI" help="Set up jwks uri">
+                            <field name="g2p_social_registry_auth_jwks_uri" />
+                        </setting>
+                    </block>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

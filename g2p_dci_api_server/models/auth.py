@@ -5,7 +5,6 @@ class RequestAuth(BaseModel):
     client_id: str = ""
     client_secret: str = ""
     grant_type: str = ""
-    db_name: str = ""
 
 
 class ResponseAuth(BaseModel):

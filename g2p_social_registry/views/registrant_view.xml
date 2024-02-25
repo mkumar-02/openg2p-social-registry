@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" >
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Individual view -->
     <record id="view_g2p_social_registry_individual_region" model="ir.ui.view">
@@ -20,7 +20,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='address']" position="after">
                     <field name="region" />
-                </xpath>
             </xpath>
         </field>
     </record>
