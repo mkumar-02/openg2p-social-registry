@@ -9,9 +9,7 @@
     "website": "https://openg2p.org",
     "license": "Other OSI approved licence",
     "depends": [
-        "base",
-        "g2p_registry_base",
-        "g2p_registry_individual",
+        "g2p_social_registry",
         "fastapi",
         "graphql_base",
     ],

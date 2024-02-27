@@ -18,9 +18,9 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='address']" position="after">
-                    <field name="region" />
+            <xpath expr="//page[@name='basic_info']/group/group" position="inside">
 
+                    <field name="region" string="Region" />
             </xpath>
         </field>
     </record>
