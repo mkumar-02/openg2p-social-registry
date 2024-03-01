@@ -65,6 +65,24 @@ body {
     background-size: 110px;
 }
 
+@media screen and (max-width: 1370px) {
+    .o_menu_sections {
+        background-position-x: 60% !important;
+    }
+}
+
+@media screen and (max-width: 1260px) {
+    .o_menu_sections {
+        background-position-x: 70% !important;
+    }
+}
+
+@media screen and (max-width: 1120px) {
+    .o_menu_sections {
+        background-position-x: 80% !important;
+    }
+}
+
 @media screen and (max-width: 960px) {
     .o_menu_sections {
         background-image: none !important;
