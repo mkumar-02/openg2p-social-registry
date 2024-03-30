@@ -21,7 +21,6 @@ _logger = logging.getLogger(__name__)
 
 
 class TestFastapiEndpoint(models.Model):
-
     _inherit = "fastapi.endpoint"
 
     app: str = fields.Selection(
@@ -98,15 +97,9 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
         auth_header = get_auth_header(request.httprequest.headers, raise_exception=True)
         access_token = auth_header.replace("Bearer ", "").replace("\\n", "")
 
-        iss_uri = (
-            request.env["ir.config_parameter"]
-            .sudo()
-            .get_param("g2p_social_registry_auth_iss", "")
-        )
+        iss_uri = request.env["ir.config_parameter"].sudo().get_param("g2p_social_registry_auth_iss", "")
         jwks_uri = (
-            request.env["ir.config_parameter"]
-            .sudo()
-            .get_param("g2p_social_registry_auth_jwks_uri", "")
+            request.env["ir.config_parameter"].sudo().get_param("g2p_social_registry_auth_jwks_uri", "")
         )
         verified, payload = verify_and_decode_signature(access_token, iss_uri, jwks_uri)
 
@@ -132,13 +125,9 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
             return error_wrapper(header_error.get("code"), header_error.get("message"))
 
         message = data.get("message", "")
-        message_error = self.check_content(
-            message, "message", ["transaction_id", "search_request"]
-        )
+        message_error = self.check_content(message, "message", ["transaction_id", "search_request"])
         if message_error:
-            return error_wrapper(
-                message_error.get("code"), message_error.get("message")
-            )
+            return error_wrapper(message_error.get("code"), message_error.get("message"))
 
         message_id = header["message_id"]
         transaction_id = message.get("transaction_id")
@@ -185,17 +174,12 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
 
     def process_queries(self, query_type, queries, graphql_schema, error=None):
         for query in queries:
-
             if query_type == constants.GRAPHQL:
                 query_error = self.check_content(query, "query", ["expression1"])
                 if query_error:
-                    return error_wrapper(
-                        query_error.get("code"), query_error.get("message")
-                    )
+                    return error_wrapper(query_error.get("code"), query_error.get("message"))
                 expression = query.get("expression1")
-                response = self._process_request(
-                    graphql_schema, data={"query": expression}
-                )
+                response = self._process_request(graphql_schema, data={"query": expression})
 
                 response_error = json.loads(response.data).get("errors", "")
                 if response_error:
@@ -205,9 +189,7 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
 
                 return error, json.loads(response.data)["data"]
 
-    def process_search_requests(
-        self, search_requests, today_isoformat, search_responses
-    ):
+    def process_search_requests(self, search_requests, today_isoformat, search_responses):
         for req in search_requests:
             req_error = self.check_content(
                 req, "search_request", ["reference_id", "timestamp", "search_criteria"]
@@ -244,9 +226,7 @@ class G2PDciApiServer(http.Controller, GraphQLControllerMixin):
             queries = search_criteria.get("query")
 
             # Process Queries
-            error, query_result = self.process_queries(
-                query_type, queries, schema.graphql_schema, None
-            )
+            error, query_result = self.process_queries(query_type, queries, schema.graphql_schema, None)
 
             if query_result and not error:
                 search_responses.append(

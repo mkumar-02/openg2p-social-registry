@@ -28,9 +28,7 @@ class SelfServiceController(http.Controller):
 
         providers = []
         try:
-            providers = OpenIDLogin().list_providers(
-                domain=[("g2p_self_service_allowed", "=", True)]
-            )
+            providers = OpenIDLogin().list_providers(domain=[("g2p_self_service_allowed", "=", True)])
         except Exception:
             providers = OpenIDLogin().list_providers()
 
@@ -41,9 +39,7 @@ class SelfServiceController(http.Controller):
 
             if not request.params["login_success"]:
                 context["error"] = "Invalid Credentials"
-                return request.render(
-                    "g2p_self_service_portal.login_page", qcontext=context
-                )
+                return request.render("g2p_self_service_portal.login_page", qcontext=context)
 
             return res
 
@@ -52,9 +48,7 @@ class SelfServiceController(http.Controller):
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)
     def self_service_logo(self, **kwargs):
         config = request.env["ir.config_parameter"].sudo()
-        attachment_id = config.get_param(
-            "g2p_self_service_portal.self_service_logo_attachment"
-        )
+        attachment_id = config.get_param("g2p_self_service_portal.self_service_logo_attachment")
         return request.redirect("/web/content/%s" % attachment_id)
 
     @http.route(["/selfservice/myprofile"], type="http", auth="public", website=True)

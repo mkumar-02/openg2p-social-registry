@@ -1,1 +1,1 @@
-OpenG2P Theme module
+OpenG2P Social Registry Theme module

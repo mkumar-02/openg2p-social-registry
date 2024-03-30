@@ -18,9 +18,7 @@ class ResUser(models.Model):
         if not users:
             users = self.search([("email", "=", login)])
         if len(users) != 1:
-            raise Exception(
-                _("Incorrect email. Please enter the registered email address.")
-            )
+            raise Exception(_("Incorrect email. Please enter the registered email address."))
         return users.action_reset_password()
 
     @classmethod
