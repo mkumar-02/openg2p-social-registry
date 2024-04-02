@@ -25,9 +25,7 @@
     ],
     "assets": {
         "web.assets_backend": [],
-        "web.assets_frontend": [
-            "g2p_self_service_portal/static/src/js/self_service_form_action.js"
-        ],
+        "web.assets_frontend": ["g2p_self_service_portal/static/src/js/self_service_form_action.js"],
         "web.assets_common": [],
     },
     "demo": [],

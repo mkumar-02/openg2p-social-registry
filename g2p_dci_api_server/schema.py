@@ -31,7 +31,7 @@ class Query(graphene.ObjectType):
         Partner,
         required=True,
         limit=graphene.Int(),
-        **{key: graphene.String() for key in Partner._meta.fields if key != "reg_ids"}
+        **{key: graphene.String() for key in Partner._meta.fields if key != "reg_ids"},
     )
 
     total_registrant_count = graphene.Int()
