@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <record model="fastapi.endpoint" id="fastapi_endpoint_social_registry">
-        <field name="name">G2P Connect Registry APIs</field>
-        <field name="app">socialregistry</field>
-        <field name="root_path">/socialregistry</field>
-        <!-- <field name="user_id" ref="fastapi.my_demo_app_user" /> -->
-    </record>
-</odoo>

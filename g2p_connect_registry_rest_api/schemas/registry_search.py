@@ -14,7 +14,7 @@ class SearchCriteriaRequest(BaseModel):
     version: str = "1.0.0"
     reg_type: str = ""
     reg_event_type: str = ""
-    query_type: str = ""
+    query_type: str = "graphql"
     query: str
 
 
@@ -31,32 +31,32 @@ class RegistrySearchRequest(BaseModel):
 
 
 class RegistrySearchHttpRequest(BaseModel):
-    signature: Optional[str]
+    signature: str | None = None
     header: Header
     message: RegistrySearchRequest
 
 
 class QueryDataResponse(BaseModel):
     version: str = "1.0.0"
-    reg_type: str
-    reg_event_type: str
+    reg_type: str | None = None
+    reg_event_type: str | None = None
     reg_record_type: str
-    reg_record: Optional[dict] = {}
+    reg_records: dict
 
 
 class SingleSearchResponse(BaseModel):
     reference_id: str
-    timestamp: datetime = datetime.utcnow()
+    timestamp: datetime = datetime.now()
     status: str
-    status_reason_code: str = None
-    status_reason_message: Optional[str] = ""
-    data: Optional[QueryDataResponse]
+    status_reason_code: str | None = None
+    status_reason_message: str | None = None
+    data: QueryDataResponse | None
     locale: str = "eng"
 
 
 class RegistrySearchResponse(BaseModel):
     transaction_id: str
-    correlation_id: str
+    correlation_id: str | None = None
     search_response: List[SingleSearchResponse]
 
 
