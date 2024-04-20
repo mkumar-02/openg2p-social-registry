@@ -22,8 +22,10 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[g2p_dci_api_server](g2p_dci_api_server/) | 17.0.1.0.0 |  | RESTful API routes for OpenG2P
+[g2p_connect_registry_rest_api](g2p_connect_registry_rest_api/) | 17.0.1.0.0 |  | RESTful API routes for Registry Search
+[g2p_self_service_portal](g2p_self_service_portal/) | 17.0.1.0.0 |  | G2P Self Service Portal
 [g2p_social_registry](g2p_social_registry/) | 17.0.1.0.0 |  | OpenG2P Social Registry
+[g2p_social_registry_theme](g2p_social_registry_theme/) | 17.0.1.0.0 |  | OpenG2P Social Registry: Theme
 
 [//]: # (end addons)
 

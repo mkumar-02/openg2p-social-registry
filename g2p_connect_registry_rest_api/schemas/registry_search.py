@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -27,7 +26,7 @@ class SingleSearchRequest(BaseModel):
 
 class RegistrySearchRequest(BaseModel):
     transaction_id: str = ""
-    search_request: List[SingleSearchRequest]
+    search_request: list[SingleSearchRequest]
 
 
 class RegistrySearchHttpRequest(BaseModel):
@@ -57,10 +56,10 @@ class SingleSearchResponse(BaseModel):
 class RegistrySearchResponse(BaseModel):
     transaction_id: str
     correlation_id: str | None = None
-    search_response: List[SingleSearchResponse]
+    search_response: list[SingleSearchResponse]
 
 
 class RegistrySearchHttpResponse(BaseModel):
-    signature: Optional[str]
+    signature: str | None
     header: ResponseHeader
     message: RegistrySearchResponse

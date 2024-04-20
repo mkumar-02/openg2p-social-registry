@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel
 
@@ -10,8 +9,8 @@ class Header(BaseModel):
     message_ts: datetime = datetime.utcnow()
     action: str = "search"
     sender_id: str = ""
-    sender_uri: Optional[str] = ""
-    receiver_id: Optional[str] = ""
+    sender_uri: str | None = ""
+    receiver_id: str | None = ""
     total_count: int
     is_msg_encrypted: bool = False
     meta: dict = {}
@@ -20,14 +19,14 @@ class Header(BaseModel):
 class ResponseHeader(BaseModel):
     version: str = "1.0.0"
     message_id: str
-    message_ts: datetime = datetime.utcnow()
+    message_ts: datetime = datetime.now()
     action: str = "on-search"
     status: str = ""
     status_reason_code: str = ""
-    status_reason_message: Optional[str] = ""
-    total_count: Optional[int] = -1
-    completed_count: Optional[int] = -1
-    sender_id: Optional[str] = ""
-    receiver_id: Optional[str] = ""
+    status_reason_message: str | None = ""
+    total_count: int | None = -1
+    completed_count: int | None = -1
+    sender_id: str | None = ""
+    receiver_id: str | None = ""
     is_msg_encrypted: bool = False
     meta: dict = {}

@@ -40,16 +40,13 @@ async def registry_search(
     env: Annotated[Environment, Depends(odoo_env)],
     Authorization: Annotated[str, Header()] = "",
 ):
-
     token = Authorization.removeprefix("Bearer")
 
     if not token:
         raise HTTPException(401, "Not authenticated.")
 
     iss_uri = (
-        env["ir.config_parameter"]
-        .sudo()
-        .get_param("g2p_dci_api_server.g2p_social_registry_auth_iss", "")
+        env["ir.config_parameter"].sudo().get_param("g2p_dci_api_server.g2p_social_registry_auth_iss", "")
     )
 
     jwks_uri = (
@@ -93,15 +90,11 @@ async def registry_search(
                     timestamp=today_isoformat,
                     status="",
                     data=QueryDataResponse(
-                        reg_type=res.get("data")["reg_type"]
-                        if res.get("data")["reg_type"]
-                        else None,
+                        reg_type=res.get("data")["reg_type"] if res.get("data")["reg_type"] else None,
                         reg_record_type=res.get("data")["reg_record_type"]
                         if res.get("data")["reg_record_type"]
                         else None,
-                        reg_records=res.get("data")["reg_record"]
-                        if res.get("data")["reg_record"]
-                        else {},
+                        reg_records=res.get("data")["reg_record"] if res.get("data")["reg_record"] else {},
                     ),
                     locale="eng",
                 )
@@ -114,7 +107,7 @@ async def registry_search(
 def verify_and_decode_signature(token, iss_uri, jwks_uri):
     try:
         if not cache_jwks:
-            jwks_res = requests.get(jwks_uri)
+            jwks_res = requests.get(jwks_uri, timeout=10)
             jwks_res.raise_for_status()
             cache_jwks.update(jwks_res.json())
 
@@ -132,12 +125,8 @@ def verify_and_decode_signature(token, iss_uri, jwks_uri):
 
 
 def process_query(query_type, query, graphql_schema):
-
     if query_type == "graphql":
-
-        response = GraphQLControllerMixin._process_request(
-            None, graphql_schema, data={"query": query}
-        )
+        response = GraphQLControllerMixin._process_request(None, graphql_schema, data={"query": query})
 
         response_error = json.loads(response.data).get("errors", "")
         if response_error:
@@ -151,7 +140,6 @@ def process_query(query_type, query, graphql_schema):
 
 def process_search_requests(search_requests, today_isoformat, search_responses):
     for req in search_requests:
-
         search_criteria = req.search_criteria
         query_type = search_criteria.query_type
 
