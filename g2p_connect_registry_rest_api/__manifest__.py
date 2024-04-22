@@ -17,7 +17,7 @@
         "data/ir_config_params.xml",
         "data/fastapi_endpoint_g2p_connect.xml",
     ],
-    "external_dependencies": {},
+    "external_dependencies": {"python": ["python-jose"]},
     "application": True,
     "auto_install": False,
     "installable": True,

@@ -1,6 +1,5 @@
 import json
 import logging
-import uuid
 from datetime import datetime, timezone
 from typing import Annotated
 
@@ -14,14 +13,9 @@ from odoo.addons.fastapi.dependencies import odoo_env
 from odoo.addons.graphql_base import GraphQLControllerMixin
 
 from ..schema import schema
-from ..schemas.registry_search import (
-    QueryDataResponse,
-    RegistrySearchHttpRequest,
-    RegistrySearchHttpResponse,
-    RegistrySearchResponse,
-    ResponseHeader,
-    SingleSearchResponse,
-)
+from ..schemas.header import HeaderResponse
+from ..schemas.message import MessageResponse, SingleSearchResponse
+from ..schemas.registry_search import RegistrySearchRequest, RegistrySearchResponse
 
 _logger = logging.getLogger(__name__)
 
@@ -33,10 +27,10 @@ cache_jwks = {}
 
 @g2p_connect_router.post(
     "/registry/sync/search",
-    responses={200: {"model": RegistrySearchHttpResponse}},
+    responses={200: {"model": RegistrySearchResponse}},
 )
 async def registry_search(
-    data: RegistrySearchHttpRequest,
+    search_request: RegistrySearchRequest,
     env: Annotated[Environment, Depends(odoo_env)],
     Authorization: Annotated[str, Header()] = "",
 ):
@@ -46,13 +40,15 @@ async def registry_search(
         raise HTTPException(401, "Not authenticated.")
 
     iss_uri = (
-        env["ir.config_parameter"].sudo().get_param("g2p_dci_api_server.g2p_social_registry_auth_iss", "")
+        env["ir.config_parameter"]
+        .sudo()
+        .get_param("g2p_connect_registry_rest_api.g2p_social_registry_auth_iss", "")
     )
 
     jwks_uri = (
         env["ir.config_parameter"]
         .sudo()
-        .get_param("g2p_dci_api_server.g2p_social_registry_auth_jwks_uri", "")
+        .get_param("g2p_connect_registry_rest_api.g2p_social_registry_auth_jwks_uri", "")
     )
 
     verified, payload = verify_and_decode_signature(token, iss_uri, jwks_uri)
@@ -60,46 +56,22 @@ async def registry_search(
     if not verified:
         raise HTTPException(status_code=401, detail="Invalid Access Token")
 
-    message_id = data.header.message_id
-    transaction_id = data.message.transaction_id
-    search_requests = data.message.search_request
+    message_id = search_request.header.message_id
+    transaction_id = search_request.message.transaction_id
+    search_requests = search_request.message.search_request
 
     today_isoformat = datetime.now(timezone.utc).isoformat()
-    str(uuid.uuid4())
 
     # Process search requests and modify search_responses
     search_responses = []
     process_search_requests(search_requests, today_isoformat, search_responses)
 
-    return RegistrySearchHttpResponse(
-        signature=data.signature,
-        header=ResponseHeader(
-            message_id=message_id,
-            action="on-search",
-            status="",
-            sender_id="",
-            receiver_id="",
-            total_count=-1,
-            completed_count=0,
-        ),
-        message=RegistrySearchResponse(
+    return RegistrySearchResponse(
+        signature=search_request.signature,
+        header=HeaderResponse(message_id=message_id, action="on-search", status="succ"),
+        message=MessageResponse(
             transaction_id=transaction_id,
-            search_response=[
-                SingleSearchResponse(
-                    reference_id=res.get("reference_id", None),
-                    timestamp=today_isoformat,
-                    status="",
-                    data=QueryDataResponse(
-                        reg_type=res.get("data")["reg_type"] if res.get("data")["reg_type"] else None,
-                        reg_record_type=res.get("data")["reg_record_type"]
-                        if res.get("data")["reg_record_type"]
-                        else None,
-                        reg_records=res.get("data")["reg_record"] if res.get("data")["reg_record"] else {},
-                    ),
-                    locale="eng",
-                )
-                for res in search_responses
-            ],
+            search_response=[SingleSearchResponse.model_validate(res) for res in search_responses],
         ),
     )
 
@@ -126,11 +98,11 @@ def verify_and_decode_signature(token, iss_uri, jwks_uri):
 
 def process_query(query_type, query, graphql_schema):
     if query_type == "graphql":
+        _logger.info("Graphql query:", query)
         response = GraphQLControllerMixin._process_request(None, graphql_schema, data={"query": query})
 
         response_error = json.loads(response.data).get("errors", "")
         if response_error:
-            _logger.error("Error in the query result", response_error)
             raise HTTPException(404, response_error[0]["message"])
 
         return json.loads(response.data)["data"]
@@ -157,16 +129,10 @@ def process_search_requests(search_requests, today_isoformat, search_responses):
                     "reference_id": reference_id,
                     "timestamp": today_isoformat,
                     "status": "succ",
-                    "status_reason_code": "string",
-                    "status_reason_message": "",
                     "data": {
-                        # "version": "1.0.0",
-                        "reg_event_type": "string",
-                        "reg_record_type": "person",
                         "reg_type": reg_type,
-                        "reg_record": query_result,
+                        "reg_records": query_result,
                     },
-                    "locale": "eng",
                 }
             )
 

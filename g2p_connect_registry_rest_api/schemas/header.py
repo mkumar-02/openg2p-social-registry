@@ -3,10 +3,10 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
-class Header(BaseModel):
+class HeaderRequest(BaseModel):
     version: str = "1.0.0"
     message_id: str = ""
-    message_ts: datetime = datetime.utcnow()
+    message_ts: datetime = datetime.now()
     action: str = "search"
     sender_id: str = ""
     sender_uri: str | None = ""
@@ -16,9 +16,9 @@ class Header(BaseModel):
     meta: dict = {}
 
 
-class ResponseHeader(BaseModel):
+class HeaderResponse(BaseModel):
     version: str = "1.0.0"
-    message_id: str
+    message_id: str | None = ""
     message_ts: datetime = datetime.now()
     action: str = "on-search"
     status: str = ""
@@ -29,4 +29,4 @@ class ResponseHeader(BaseModel):
     sender_id: str | None = ""
     receiver_id: str | None = ""
     is_msg_encrypted: bool = False
-    meta: dict = {}
+    meta: dict | None = {}
