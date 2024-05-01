@@ -22,7 +22,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[g2p_connect_registry_rest_api](g2p_connect_registry_rest_api/) | 17.0.1.0.0 |  | RESTful API routes for Registry Search
+[g2p_registry_g2p_connect_rest_api](g2p_registry_g2p_connect_rest_api/) | 17.0.1.0.0 |  | OpenG2P Registry: G2P Connect REST API
 [g2p_social_registry](g2p_social_registry/) | 17.0.1.0.0 |  | OpenG2P Social Registry
 [g2p_social_registry_theme](g2p_social_registry_theme/) | 17.0.1.0.0 |  | OpenG2P Social Registry: Theme
 

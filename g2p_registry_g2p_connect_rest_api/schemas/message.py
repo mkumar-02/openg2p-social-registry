@@ -28,12 +28,6 @@ class MessageRequest(BaseModel):
     search_request: list[SingleSearchRequest]
 
 
-class PaginationResponse(BaseModel):
-    page_size: int | None = None
-    page_number: int | None = None
-    total_count: int = None
-
-
 class QueryDataResponse(BaseModel):
     version: str = "1.0.0"
     reg_type: str | None = None
@@ -49,7 +43,6 @@ class SingleSearchResponse(BaseModel):
     status_reason_code: str | None = None
     status_reason_message: str | None = None
     data: QueryDataResponse
-    pagination: PaginationResponse | None = {}
     locale: str = "en"
 
 

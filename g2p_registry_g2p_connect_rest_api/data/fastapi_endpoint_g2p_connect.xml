@@ -10,6 +10,6 @@
     <function
         model="fastapi.endpoint"
         name="sync_endpoint_id_with_registry"
-        eval="(ref('g2p_connect_registry_rest_api.fastapi_endpoint_g2p_connect_registry'),)"
+        eval="(ref('g2p_registry_g2p_connect_rest_api.fastapi_endpoint_g2p_connect_registry'),)"
     />
 </odoo>

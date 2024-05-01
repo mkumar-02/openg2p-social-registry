@@ -1,7 +1,6 @@
 # Part of OpenG2P Social Registry. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenG2P Registry: G2P Connect Registry API",
-    "summary": "RESTful API routes for Registry Search",
+    "name": "OpenG2P Registry: G2P Connect REST API",
     "category": "G2P",
     "version": "17.0.1.0.0",
     "author": "OpenG2P",
@@ -9,7 +8,7 @@
     "website": "https://openg2p.org",
     "license": "Other OSI approved licence",
     "depends": [
-        "g2p_social_registry",
+        "g2p_registry_membership",
         "fastapi",
         "graphql_base",
     ],

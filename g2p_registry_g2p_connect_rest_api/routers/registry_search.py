@@ -12,15 +12,14 @@ from odoo.api import Environment
 from odoo.addons.fastapi.dependencies import odoo_env
 from odoo.addons.graphql_base import GraphQLControllerMixin
 
-from ..schema import schema
+from ..schemas.graphql_schema import schema
 from ..schemas.header import HeaderResponse
 from ..schemas.message import MessageResponse, SingleSearchResponse
 from ..schemas.registry_search import RegistrySearchRequest, RegistrySearchResponse
 
 _logger = logging.getLogger(__name__)
 
-
-g2p_connect_router = APIRouter(tags=["g2p-connect registry"])
+g2p_connect_router = APIRouter()
 
 cache_jwks = {}
 
@@ -34,24 +33,18 @@ async def registry_search(
     env: Annotated[Environment, Depends(odoo_env)],
     Authorization: Annotated[str, Header()] = "",
 ):
-    token = Authorization.removeprefix("Bearer")
+    token = Authorization.removeprefix("Bearer").strip()
 
     if not token:
-        raise HTTPException(401, "Not authenticated.")
+        raise HTTPException(401, "Missing authorization header.")
 
-    iss_uri = (
-        env["ir.config_parameter"]
-        .sudo()
-        .get_param("g2p_connect_registry_rest_api.g2p_social_registry_auth_iss", "")
-    )
+    iss_uri = env["ir.config_parameter"].sudo().get_param("g2p_registry_g2p_connect_rest_api.auth_iss", "")
 
     jwks_uri = (
-        env["ir.config_parameter"]
-        .sudo()
-        .get_param("g2p_connect_registry_rest_api.g2p_social_registry_auth_jwks_uri", "")
+        env["ir.config_parameter"].sudo().get_param("g2p_registry_g2p_connect_rest_api.auth_jwks_uri", "")
     )
 
-    verified, payload = verify_and_decode_signature(token, iss_uri, jwks_uri)
+    verified = verify_auth_token(token, iss_uri, jwks_uri)
 
     if not verified:
         raise HTTPException(status_code=401, detail="Invalid Access Token")
@@ -62,7 +55,6 @@ async def registry_search(
 
     today_isoformat = datetime.now(timezone.utc).isoformat()
 
-    # Process search requests and modify search_responses
     search_responses = []
     process_search_requests(search_requests, today_isoformat, search_responses)
 
@@ -76,7 +68,7 @@ async def registry_search(
     )
 
 
-def verify_and_decode_signature(token, iss_uri, jwks_uri):
+def verify_auth_token(token, iss_uri, jwks_uri):
     try:
         if not cache_jwks:
             jwks_res = requests.get(jwks_uri, timeout=10)
@@ -107,7 +99,8 @@ def process_query(query_type, query, graphql_schema):
 
         return json.loads(response.data)["data"]
 
-    return False, {}
+    else:
+        raise NotImplementedError("Only graphql query type supported.")
 
 
 def process_search_requests(search_requests, today_isoformat, search_responses):
@@ -120,7 +113,6 @@ def process_search_requests(search_requests, today_isoformat, search_responses):
         reference_id = req.reference_id
         query = search_criteria.query
 
-        # Process Query
         query_result = process_query(query_type, query, schema.graphql_schema)
 
         if query_result:

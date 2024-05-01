@@ -1,6 +1,6 @@
-==========================================
-OpenG2P Registry: G2P Connect Registry API
-==========================================
+======================================
+OpenG2P Registry: G2P Connect REST API
+======================================
 
 .. 
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -14,7 +14,7 @@ OpenG2P Registry: G2P Connect Registry API
     :target: https://odoo-community.org/page/development-status
     :alt: Alpha
 .. |badge2| image:: https://img.shields.io/badge/github-OpenG2P%2Fopeng2p--social--registry-lightgray.png?logo=github
-    :target: https://github.com/OpenG2P/openg2p-social-registry/tree/17.0-develop/g2p_connect_registry_rest_api
+    :target: https://github.com/OpenG2P/openg2p-social-registry/tree/17.0-develop/g2p_registry_g2p_connect_rest_api
     :alt: OpenG2P/openg2p-social-registry
 
 |badge1| |badge2|
@@ -37,7 +37,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OpenG2P/openg2p-social-registry/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OpenG2P/openg2p-social-registry/issues/new?body=module:%20g2p_connect_registry_rest_api%0Aversion:%2017.0-develop%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OpenG2P/openg2p-social-registry/issues/new?body=module:%20g2p_registry_g2p_connect_rest_api%0Aversion:%2017.0-develop%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -57,6 +57,6 @@ Contributors
 Maintainers
 ~~~~~~~~~~~
 
-This module is part of the `OpenG2P/openg2p-social-registry <https://github.com/OpenG2P/openg2p-social-registry/tree/17.0-develop/g2p_connect_registry_rest_api>`_ project on GitHub.
+This module is part of the `OpenG2P/openg2p-social-registry <https://github.com/OpenG2P/openg2p-social-registry/tree/17.0-develop/g2p_registry_g2p_connect_rest_api>`_ project on GitHub.
 
 You are welcome to contribute.
