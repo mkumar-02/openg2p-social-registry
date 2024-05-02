@@ -44,7 +44,7 @@ async def registry_search(
         env["ir.config_parameter"].sudo().get_param("g2p_registry_g2p_connect_rest_api.auth_jwks_uri", "")
     )
 
-    verified = verify_auth_token(token, iss_uri, jwks_uri)
+    verified, payload = verify_auth_token(token, iss_uri, jwks_uri)
 
     if not verified:
         raise HTTPException(status_code=401, detail="Invalid Access Token")
