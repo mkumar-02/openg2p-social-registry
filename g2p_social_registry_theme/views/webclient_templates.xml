@@ -1,5 +1,5 @@
 <odoo>
-    <template id="custom_web_layout" name="Custom Web Layout" inherit_id="web.layout">
+    <template id="custom_web_layout" name="Custom Web Layout" inherit_id="web.layout" priority="100">
         <xpath expr="//head/link[@rel='shortcut icon']" position="replace">
             <link
                 type="image/x-icon"

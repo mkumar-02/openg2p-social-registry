@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-	<template id="g2ptheme_login" inherit_id="auth_signup.login" name="Sign up - Reset Password">
+	<template id="g2ptheme_login" inherit_id="auth_signup.login" name="Sign up - Reset Password" priority="100">
 		<xpath expr="//div[@class='justify-content-between mt-2 d-flex small']" position="replace">
 		</xpath>
 	</template>
 
-    <template id="login" inherit_id="web.login" name="Login Inherit">
+    <template id="login" inherit_id="web.login" name="Login Inherit" priority="100">
 		<xpath expr="//input[@name='login']" position="attributes">
 			<attribute name="placeholder" />
 		</xpath>
