@@ -1,8 +1,16 @@
 <odoo>
-    <data>
-          <record id="object0" model="g2p_social_registry_deduplication.g2p_social_registry_deduplication">
-            <field name="name">Object 0</field>
-            <field name="value">0</field>
-          </record>
-    </data>
+
+  <data noupdate="1">
+    <record id="object1" model="g2p.program">
+      <field name="name">Humanity Program</field>
+    </record>
+  </data>
+
+  <data>
+    <function
+            model="ir.default"
+            name="set"
+            eval="('g2p.deduplication.manager.id_dedup', 'program_id', ref('g2p_social_registry_deduplication.object1'))"
+        />
+  </data>
 </odoo>

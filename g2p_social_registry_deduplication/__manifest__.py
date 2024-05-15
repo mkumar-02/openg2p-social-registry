@@ -16,6 +16,7 @@
     ],
     "external_dependencies": {},
     "data": [
+        "data/data.xml",
         "views/menu.xml",
         "views/registrant_view.xml",
         "views/registrant_action_view.xml",
