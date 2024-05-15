@@ -19,6 +19,7 @@
         "views/menu.xml",
         "views/registrant_view.xml",
         "views/registrant_action_view.xml",
+        "views/id_deduplication_view.xml",
     ],
     "assets": {
         "web.assets_backend": [
