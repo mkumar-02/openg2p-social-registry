@@ -1,0 +1,109 @@
+<odoo>
+    <record id="g2p_registry_group.action_groups_list" model="ir.actions.act_window">
+        <field name="name">Groups</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="g2p_registry_group.view_registry_groups_filter" />
+        <field name="context">
+            {'default_is_registrant':True,'default_is_group':True,'registrant_form':True}</field>
+        <field name="domain">[('is_registrant', '=',
+            True),('is_group','=',True),('is_duplicate','=',False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new group registrant!
+            </p>
+            <p>
+                Click the create button to enter the new registrant's information.
+            </p>
+        </field>
+    </record>
+
+    <record id="g2p_registry_individual.action_individuals_list" model="ir.actions.act_window">
+        <field name="name">Individuals</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="g2p_registry_individual.view_registry_individuals_filter" />
+        <field name="context">
+            {'default_is_registrant':True,'default_is_group':False,'registrant_form':True}</field>
+        <field name="domain">
+            [('is_registrant','=',True),('is_group','=',False),('is_duplicate','=',False)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new individual registrant!
+            </p>
+            <p>
+                Click the create button to enter the new registrant's information.
+            </p>
+        </field>
+    </record>
+
+
+    <!-- Duplicates -->
+    <!-- Groups -->
+    <record id="duplicates_action_groups_list" model="ir.actions.act_window">
+        <field name="name">Duplicate Groups</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="g2p_registry_group.view_registry_groups_filter" />
+        <field name="context">
+            {'default_is_registrant':True,'default_is_group':True,'registrant_form':True,'default_is_duplicate':True,'create':0}</field>
+        <field name="domain">[('is_registrant', '=',
+            True),('is_group','=',True),('is_duplicate','=',True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Check duplicates group registrant!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_groups_list_tree_new" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="g2p_registry_group.view_groups_list_tree" />
+        <field name="act_window_id" ref="duplicates_action_groups_list" />
+    </record>
+
+    <record id="action_groups_form_new" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="g2p_registry_group.view_groups_form" />
+        <field name="act_window_id" ref="duplicates_action_groups_list" />
+    </record>
+
+    <!-- Individuals -->
+    <record id="duplicate_action_individuals_list" model="ir.actions.act_window">
+        <field name="name">Duplicate Individuals</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="g2p_registry_individual.view_registry_individuals_filter" />
+        <field name="context">
+            {'default_is_registrant':True,'default_is_group':False,'registrant_form':True,'default_is_duplicate':True,'create':0}</field>
+        <field name="domain">
+            [('is_registrant','=',True),('is_group','=',False),('is_duplicate','=',True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Check duplicates individual registrant!
+            </p>
+        </field>
+    </record>
+
+    <record id="action_individuals_list_tree_new" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="g2p_registry_individual.view_individuals_list_tree" />
+        <field name="act_window_id" ref="duplicate_action_individuals_list" />
+    </record>
+
+    <record id="action_individuals_form_new" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="g2p_registry_individual.view_individuals_form" />
+        <field name="act_window_id" ref="duplicate_action_individuals_list" />
+    </record>
+    <!-- End Duplicates -->
+
+</odoo>
