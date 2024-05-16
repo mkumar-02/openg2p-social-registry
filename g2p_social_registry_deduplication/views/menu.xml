@@ -1,0 +1,37 @@
+<odoo>
+	<!-- ID Deduplication -->
+    <!-- TODO: Need to create separate menu in regsirty for ID dedup -->
+	<menuitem
+        id="g2p_programs.menu_deduplication_manager_id_dedup"
+        name="ID Deduplication Managers"
+        action="g2p_programs.action_deduplication_manager_id_dedup"
+        parent="g2p_registry_base.g2p_configuration_menu_root"
+        sequence="200"
+    />
+
+	<!-- Duplicates -->
+
+		<menuitem id="dup_menu" name="Duplicates" parent="g2p_registry_base.g2p_main_menu_root" sequence="30" />
+
+		<menuitem
+        id="dup_menu_individuals_list"
+        name="Duplicates Individuals"
+        action="g2p_social_registry_deduplication.duplicate_action_individuals_list"
+        parent="g2p_social_registry_deduplication.dup_menu"
+        sequence="20"
+    />
+
+		<menuitem
+        id="dup_menu_groups_list"
+        name="Duplicates Groups"
+        action="g2p_social_registry_deduplication.duplicates_action_groups_list"
+        parent="g2p_social_registry_deduplication.dup_menu"
+        sequence="10"
+    />
+	<!--End Duplicates -->
+
+	<!-- Program menu -->
+
+	<menuitem id="g2p_programs.g2p_program_menu_root" name="Programs" sequence="10" active="False" />
+
+</odoo>

@@ -1,0 +1,42 @@
+<odoo>
+    <!-- Tree view -->
+    <record id="view_deduplication_manager_id_dedup_tree_inherit" model="ir.ui.view">
+        <field name="name">view_deduplication_manager_id_dedup_tree.inherit</field>
+        <field name="model">g2p.deduplication.manager.id_dedup</field>
+        <field name="inherit_id" ref="g2p_programs.view_deduplication_manager_id_dedup_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='program_id']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_deduplication_manager_id_dedup_form_inherit" model="ir.ui.view">
+        <field name="name">view_deduplication_manager_id_dedup_form_inherit</field>
+        <field name="model">g2p.deduplication.manager.id_dedup</field>
+        <field name="inherit_id" ref="g2p_programs.view_deduplication_manager_id_dedup_form" />
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <div class="oe_title mb24" position="replace">
+                <label for="name" string="Name:" />
+                <h1>
+                    <field id="name" name="name" placeholder="Enter the Manager Name..." />
+                </h1>
+                <label for="program_id" string="Program:" invisible="1" />
+                <h2 invisible="context.get('default_program_id',False)">
+                    <field
+                        id="program_id"
+                        name="program_id"
+                        placeholder="Select a program..."
+                        options="{'no_open':True,'no_create':True,'no_create_edit':True}"
+                        invisible="1"
+                        domain="[('state','=','active')]"
+                    />
+                </h2>
+                <div class="o_row">
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
