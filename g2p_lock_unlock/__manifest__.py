@@ -1,6 +1,6 @@
 # Part of OpenG2P Social Registry. See LICENSE file for full copyright and licensing details.
 {
-    "name": "OpenG2P Edit Lock",
+    "name": "OpenG2P Lock Unlock",
     "category": "G2P",
     "version": "17.0.1.0.0",
     "sequence": 1,
