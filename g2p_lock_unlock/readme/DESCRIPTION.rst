@@ -1,1 +1,1 @@
-G2P Edit Lock
+G2P Lock Unlock
