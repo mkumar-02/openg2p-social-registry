@@ -14,7 +14,12 @@
         "g2p_registry_membership",
     ],
     "external_dependencies": {},
-    "data": ["views/main_view.xml", "views/registrant_view.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/main_view.xml",
+        "views/region.xml",
+        "views/registrant_view.xml",
+    ],
     "assets": {},
     "demo": [],
     "images": [],
