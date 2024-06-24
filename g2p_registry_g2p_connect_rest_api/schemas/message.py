@@ -2,6 +2,8 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
+from .status_codes import StatusEnum
+
 
 class QueryRequest(BaseModel):
     query_name: str = ""
@@ -39,7 +41,7 @@ class QueryDataResponse(BaseModel):
 class SingleSearchResponse(BaseModel):
     reference_id: str | None = None
     timestamp: datetime = datetime.now()
-    status: str
+    status: StatusEnum
     status_reason_code: str | None = None
     status_reason_message: str | None = None
     data: QueryDataResponse

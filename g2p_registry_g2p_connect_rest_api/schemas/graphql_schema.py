@@ -59,6 +59,7 @@ class Query(graphene.ObjectType):
         required=True,
         limit=graphene.Int(),
         is_group=graphene.Boolean(),
+        last_sync_date=graphene.DateTime(),
         **{
             key: graphene.String()
             for key in Partner._meta.fields
@@ -69,13 +70,16 @@ class Query(graphene.ObjectType):
     total_registrant_count = graphene.Int()
 
     @staticmethod
-    def resolve_get_registrants(root, info, is_group: bool = None, limit=None, **kwargs):
+    def resolve_get_registrants(root, info, last_sync_date=None, is_group: bool = None, limit=None, **kwargs):
         global count
 
         domain = [(("is_registrant", "=", True))]
 
         if is_group is not None:
             domain.append(("is_group", "=", is_group))
+
+        if last_sync_date is not None:
+            domain.append(("create_date", ">", last_sync_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")))
 
         for key, value in kwargs.items():
             if value is not None:
