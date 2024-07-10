@@ -20,22 +20,23 @@ class ResPartner(models.Model):
         self.reset_duplicate_flag(is_group)
 
         if not is_group:
-            ind_duplicate_count = 0
+            ind_duplicate_ids = []
             duplicates = self.get_duplicate_registrants(
                 is_group, id_types, group_condition="group_kind.name IS NULL"
             )
+
             for duplicate in duplicates:
                 duplicate_partner_ids_str = duplicate.get("partner_ids")
-                ind_duplicate_count += int(duplicate.get("count"))
-                duplicate_partner_ids = list(duplicate_partner_ids_str.split(","))
+                ind_duplicate_ids += duplicate_partner_ids_str.split(",")
 
-                self.mark_registrant_as_duplicated(duplicate_partner_ids)
+            updated_ind_duplicate_ids = list(set(ind_duplicate_ids))
+            self.mark_registrant_as_duplicated(updated_ind_duplicate_ids)
 
-            message = f"{ind_duplicate_count} individuals"
+            message = f"{len(updated_ind_duplicate_ids)} individuals"
 
         else:
-            group_duplicate_count = 0
-            member_duplicate_count = 0
+            group_duplicate_ids = []
+            member_duplicate_ids = []
             grouped_kinds = self.get_grouped_kinds()
             for kind in grouped_kinds:
                 group_kind_name = kind.get("kind")
@@ -44,27 +45,31 @@ class ResPartner(models.Model):
                 group_duplicates = self.get_duplicate_registrants(
                     is_group, id_types, group_condition=f"group_kind.name = '{group_kind_name}'"
                 )
+
+                # Group Duplicate
                 for duplicate in group_duplicates:
                     duplicate_partner_ids_str = duplicate.get("partner_ids")
-                    group_duplicate_count += int(duplicate.get("count"))
-                    duplicate_partner_ids = list(duplicate_partner_ids_str.split(","))
+                    group_duplicate_ids += duplicate_partner_ids_str.split(",")
 
-                    self.mark_registrant_as_duplicated(duplicate_partner_ids)
+                updated_grp_duplicate_ids = list(set(group_duplicate_ids))
+                self.mark_registrant_as_duplicated(updated_grp_duplicate_ids)
 
+                # Group Member Duplicate
                 group_member_duplicates = self.get_duplicate_group_members(group_ids_str, id_types)
                 for member_duplicate in group_member_duplicates:
                     duplicate_partner_ids_str = member_duplicate.get("partner_ids")
-                    member_duplicate_count += int(member_duplicate.get("count"))
-                    duplicate_partner_ids = list(duplicate_partner_ids_str.split(","))
+                    member_duplicate_ids += duplicate_partner_ids_str.split(",")
 
-                    self.mark_registrant_as_duplicated(duplicate_partner_ids)
+                updated_member_duplicate_ids = list(set(member_duplicate_ids))
+                self.mark_registrant_as_duplicated(updated_member_duplicate_ids)
 
-            if group_duplicate_count > 0 and member_duplicate_count > 0:
-                message = f"{group_duplicate_count} groups and {member_duplicate_count} group members"
-            elif member_duplicate_count > 0:
-                message = f"{member_duplicate_count} group members"
+            if len(updated_grp_duplicate_ids) > 0 and len(updated_member_duplicate_ids) > 0:
+                message = f"{len(updated_grp_duplicate_ids)} groups and \
+                    {len(updated_member_duplicate_ids)} group members"
+            elif len(updated_member_duplicate_ids) > 0:
+                message = f"{len(updated_member_duplicate_ids)} group members"
             else:
-                message = f"{group_duplicate_count} groups"
+                message = f"{len(updated_grp_duplicate_ids)} groups"
 
         return {
             "type": "ir.actions.client",
@@ -130,7 +135,7 @@ class ResPartner(models.Model):
     def get_grouped_kinds(self):
         query = """
             SELECT
-            group_kind.name AS kind, COUNT(group_kind.name) AS count, STRING_AGG(partner.id::text, ',')
+            group_kind.name AS kind, STRING_AGG(partner.id::text, ',')
             AS group_ids
             FROM res_partner AS partner
             LEFT JOIN g2p_group_kind AS group_kind ON group_kind.id = partner.kind
@@ -149,7 +154,7 @@ class ResPartner(models.Model):
     def get_duplicate_registrants(self, is_group, id_types, group_condition):
         query = f"""
             SELECT
-            reg_id.value AS id_value, COUNT(partner.id) AS count, STRING_AGG(partner.id::text, ',')
+            reg_id.value AS id_value, STRING_AGG(partner.id::text, ',')
             AS partner_ids
             FROM res_partner AS partner
             INNER JOIN g2p_reg_id AS reg_id ON reg_id.partner_id = partner.id
@@ -172,7 +177,7 @@ class ResPartner(models.Model):
     def get_duplicate_group_members(self, group_ids, id_types):
         query = f"""
             SELECT
-            reg_id.value AS id_value, COUNT(partner.id) AS count, STRING_AGG(group_member.group::text, ',')
+            reg_id.value AS id_value, STRING_AGG(group_member.group::text, ',')
             AS partner_ids
             FROM res_partner AS partner
             JOIN g2p_group_membership AS group_member ON partner.id = group_member.individual
