@@ -17,7 +17,6 @@ class ResPartner(models.Model):
         is_group = self._context.get("default_is_group")
 
         ind_id_types = self.get_id_types(id_field="ind_id_types")
-        grp_id_types = self.get_id_types(id_field="grp_id_types")
 
         self.reset_duplicate_flag(is_group)
 
@@ -37,6 +36,7 @@ class ResPartner(models.Model):
             message = f"{len(updated_ind_duplicate_ids)} individuals"
 
         else:
+            grp_id_types = self.get_id_types(id_field="grp_id_types")
             group_duplicate_ids = []
             member_duplicate_ids = []
             grouped_kinds = self.get_grouped_kinds()
