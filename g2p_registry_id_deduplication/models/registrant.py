@@ -1,4 +1,4 @@
-# Part of OpenG2P Social Registry. See LICENSE file for full copyright and licensing details.
+# Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
 import logging
 
@@ -16,13 +16,15 @@ class ResPartner(models.Model):
     def deduplicate_registrants(self):
         is_group = self._context.get("default_is_group")
 
-        id_types = self.get_id_types()
+        ind_id_types = self.get_id_types(id_field="ind_id_types")
+        grp_id_types = self.get_id_types(id_field="grp_id_types")
+
         self.reset_duplicate_flag(is_group)
 
         if not is_group:
             ind_duplicate_ids = []
             duplicates = self.get_duplicate_registrants(
-                is_group, id_types, group_condition="group_kind.name IS NULL"
+                is_group, ind_id_types, group_condition="group_kind.name IS NULL"
             )
 
             for duplicate in duplicates:
@@ -43,7 +45,13 @@ class ResPartner(models.Model):
                 group_ids_str = kind.get("group_ids")
 
                 group_duplicates = self.get_duplicate_registrants(
-                    is_group, id_types, group_condition=f"group_kind.name = '{group_kind_name}'"
+                    is_group,
+                    grp_id_types,
+                    group_condition=(
+                        f"group_kind.name = '{group_kind_name}'"
+                        if group_kind_name is not None
+                        else "group_kind.name IS NULL"
+                    ),
                 )
 
                 # Group Duplicate
@@ -55,7 +63,7 @@ class ResPartner(models.Model):
                 self.mark_registrant_as_duplicated(updated_grp_duplicate_ids)
 
                 # Group Member Duplicate
-                group_member_duplicates = self.get_duplicate_group_members(group_ids_str, id_types)
+                group_member_duplicates = self.get_duplicate_group_members(group_ids_str, grp_id_types)
                 for member_duplicate in group_member_duplicates:
                     duplicate_partner_ids_str = member_duplicate.get("partner_ids")
                     member_duplicate_ids += duplicate_partner_ids_str.split(",")
@@ -85,7 +93,7 @@ class ResPartner(models.Model):
             },
         }
 
-    def get_id_types(self):
+    def get_id_types(self, id_field):
         id_types = []
 
         dedup_criteria_id = (
@@ -104,7 +112,7 @@ class ResPartner(models.Model):
         if not dedup_criteria:
             raise UserError(_("Deduplication configuration not found."))
 
-        for id_type in dedup_criteria.id_types:
+        for id_type in dedup_criteria[id_field]:
             id_types.append(id_type.name)
 
         if len(id_types) < 1:
