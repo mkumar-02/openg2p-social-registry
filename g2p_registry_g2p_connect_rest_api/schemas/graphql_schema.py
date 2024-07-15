@@ -72,7 +72,9 @@ class Query(graphene.ObjectType):
     total_registrant_count = graphene.Int()
 
     @staticmethod
-    def resolve_get_registrants(root, info, last_sync_date=None, is_group: bool = None, limit=None, order=None, offset=None, **kwargs):
+    def resolve_get_registrants(
+        root, info, last_sync_date=None, is_group: bool = None, limit=None, order=None, offset=None, **kwargs
+    ):
         global count
 
         domain = [(("is_registrant", "=", True))]
