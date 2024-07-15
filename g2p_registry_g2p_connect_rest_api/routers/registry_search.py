@@ -90,11 +90,14 @@ def verify_auth_token(token, iss_uri, jwks_uri):
 
 def process_query(query_type, query, graphql_schema):
     if query_type == "graphql":
-        _logger.info("Graphql query:", query)
-        response = GraphQLControllerMixin._process_request(None, graphql_schema, data={"query": query})
+        _logger.debug("Graphql query:", query)
+        response = GraphQLControllerMixin._process_request(
+            None, graphql_schema, data={"query": query.strip()}
+        )
 
         response_error = json.loads(response.data).get("errors", "")
         if response_error:
+            _logger.error(response_error[0]["message"])
             raise HTTPException(404, response_error[0]["message"])
 
         return json.loads(response.data)["data"]
@@ -103,17 +106,22 @@ def process_query(query_type, query, graphql_schema):
         raise NotImplementedError("Only graphql query type supported.")
 
 
+def get_graphql_schema():
+    # Override this method to import a different schema
+    return schema.graphql_schema
+
+
 def process_search_requests(search_requests, today_isoformat, search_responses):
     for req in search_requests:
+        reference_id = req.reference_id
         search_criteria = req.search_criteria
         query_type = search_criteria.query_type
-
         reg_type = search_criteria.reg_type
-
-        reference_id = req.reference_id
         query = search_criteria.query
 
-        query_result = process_query(query_type, query, schema.graphql_schema)
+        schema = get_graphql_schema()
+
+        query_result = process_query(query_type, query, schema)
 
         if query_result:
             search_responses.append(
