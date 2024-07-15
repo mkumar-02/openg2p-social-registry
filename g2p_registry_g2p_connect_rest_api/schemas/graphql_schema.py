@@ -57,8 +57,10 @@ class Query(graphene.ObjectType):
     get_registrants = graphene.List(
         Partner,
         required=True,
-        limit=graphene.Int(),
         is_group=graphene.Boolean(),
+        limit=graphene.Int(),
+        offset=graphene.Int(),
+        order=graphene.String(),
         **{
             key: graphene.String()
             for key in Partner._meta.fields
@@ -69,7 +71,9 @@ class Query(graphene.ObjectType):
     total_registrant_count = graphene.Int()
 
     @staticmethod
-    def resolve_get_registrants(root, info, is_group: bool = None, limit=None, **kwargs):
+    def resolve_get_registrants(
+        root, info, is_group: bool = None, limit=None, order=None, offset=None, **kwargs
+    ):
         global count
 
         domain = [(("is_registrant", "=", True))]
@@ -81,7 +85,9 @@ class Query(graphene.ObjectType):
             if value is not None:
                 domain.append((key, "=", value))
 
-        partners = info.context["env"]["res.partner"].sudo().search(domain, limit=limit)
+        partners = (
+            info.context["env"]["res.partner"].sudo().search(domain, limit=limit, offset=offset, order=order)
+        )
 
         count = len(partners)
         return partners
