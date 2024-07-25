@@ -12,10 +12,16 @@
             <app name="g2p_config_settings" position="inside">
                 <block name="deduplication_setting_container" title="G2P Registry Deduplication Settings">
                     <setting
-                        string="ID Deduplication Criteria"
-                        help="Select the criteria on which deduplication needs to be performed"
+                        string="Group ID Types"
+                        help="Select the group id types on which deduplication needs to be performed"
                     >
-                        <field name="dedup_criteria_id" />
+                        <field name="grp_deduplication_id_types_ids" widget="many2many_tags" />
+                    </setting>
+                    <setting
+                        string="Individual ID Types"
+                        help="Select the individual id types on which deduplication needs to be performed"
+                    >
+                        <field name="ind_deduplication_id_types_ids" widget="many2many_tags" />
                     </setting>
                 </block>
             </app>

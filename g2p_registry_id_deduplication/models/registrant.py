@@ -16,7 +16,7 @@ class ResPartner(models.Model):
     def deduplicate_registrants(self):
         is_group = self._context.get("default_is_group")
 
-        ind_id_types = self.get_id_types(id_field="ind_id_types")
+        ind_id_types = self.get_id_types(id_field="ind_deduplication_id_types_ids")
 
         self.reset_duplicate_flag(is_group)
 
@@ -36,7 +36,7 @@ class ResPartner(models.Model):
             message = f"{len(updated_ind_duplicate_ids)} individuals"
 
         else:
-            grp_id_types = self.get_id_types(id_field="grp_id_types")
+            grp_id_types = self.get_id_types(id_field="grp_deduplication_id_types_ids")
             group_duplicate_ids = []
             member_duplicate_ids = []
             grouped_kinds = self.get_grouped_kinds()
@@ -63,7 +63,7 @@ class ResPartner(models.Model):
                 self.mark_registrant_as_duplicated(updated_grp_duplicate_ids)
 
                 # Group Member Duplicate
-                group_member_duplicates = self.get_duplicate_group_members(group_ids_str, grp_id_types)
+                group_member_duplicates = self.get_duplicate_group_members(group_ids_str, ind_id_types)
                 for member_duplicate in group_member_duplicates:
                     duplicate_partner_ids_str = member_duplicate.get("partner_ids")
                     member_duplicate_ids += duplicate_partner_ids_str.split(",")
@@ -96,27 +96,21 @@ class ResPartner(models.Model):
     def get_id_types(self, id_field):
         id_types = []
 
-        dedup_criteria_id = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("g2p_registry_id_deduplication.dedup_criteria_id", default=None)
-        )
+        ir_config = self.env["ir.config_parameter"].sudo()
 
-        if not dedup_criteria_id:
-            raise UserError(_("No deduplication criteria configured. Please configure it in the settings."))
+        id_type_ids_str = ir_config.get_param(f"g2p_registry_id_deduplication.{id_field}", default=None)
 
-        dedup_criteria = self.env["g2p.registry.id.deduplication_criteria"].search(
-            [("id", "=", dedup_criteria_id)], limit=1
-        )
+        if not id_type_ids_str:
+            raise UserError(_("Deduplication ID Types are not configured"))
 
-        if not dedup_criteria:
-            raise UserError(_("Deduplication configuration not found."))
+        id_type_ids = id_type_ids_str.strip("][").split(", ")
 
-        for id_type in dedup_criteria[id_field]:
-            id_types.append(id_type.name)
+        for id_type in id_type_ids:
+            id_type_id = self.env["g2p.id.type"].sudo().search([("id", "=", id_type)], limit=1)
+            id_types.append(id_type_id.name)
 
         if len(id_types) < 1:
-            raise UserError(_("No ID Types found in the Deduplication Configuration."))
+            raise UserError(_("No Configured ID Types found in the System"))
 
         return tuple(id_types) if len(id_types) != 1 else f"('{id_types[0]}')"
 
