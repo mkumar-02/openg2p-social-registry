@@ -15,8 +15,6 @@
     ],
     "external_dependencies": {},
     "data": [
-        "security/ir.model.access.csv",
-        "views/deduplication_criteria_view.xml",
         "views/deduplication_view.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
