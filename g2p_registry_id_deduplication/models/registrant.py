@@ -104,6 +104,7 @@ class ResPartner(models.Model):
             raise UserError(_("Deduplication ID Types are not configured"))
 
         id_type_ids = id_type_ids_str.strip("][").split(", ")
+        id_type_ids = id_type_ids if len(id_type_ids[0]) != 0 else []
 
         for id_type in id_type_ids:
             id_type_id = self.env["g2p.id.type"].sudo().search([("id", "=", id_type)], limit=1)
