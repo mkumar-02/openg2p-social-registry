@@ -1,8 +1,7 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
-from ast import literal_eval
-
 from odoo import api, fields, models
+from odoo.tools import safe_eval
 
 
 class RegistryConfig(models.TransientModel):
@@ -32,6 +31,10 @@ class RegistryConfig(models.TransientModel):
         ir_config = self.env["ir.config_parameter"].sudo()
         grp_id_types = ir_config.get_param("g2p_registry_id_deduplication.grp_deduplication_id_types_ids")
         ind_id_types = ir_config.get_param("g2p_registry_id_deduplication.ind_deduplication_id_types_ids")
-        res.update(grp_deduplication_id_types_ids=[(6, 0, literal_eval(grp_id_types))])
-        res.update(ind_deduplication_id_types_ids=[(6, 0, literal_eval(ind_id_types))])
+        res.update(
+            grp_deduplication_id_types_ids=[(6, 0, safe_eval(grp_id_types))] if grp_id_types else False
+        )
+        res.update(
+            ind_deduplication_id_types_ids=[(6, 0, safe_eval(ind_id_types))] if ind_id_types else False
+        )
         return res
