@@ -1,8 +1,7 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
-from numpy.lib.utils import safe_eval
-
 from odoo import api, fields, models
+from odoo.tools import safe_eval
 
 
 class RegistryConfig(models.TransientModel):
