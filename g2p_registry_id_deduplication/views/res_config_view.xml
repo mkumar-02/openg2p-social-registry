@@ -14,8 +14,14 @@
                     <setting
                         string="Group ID Types"
                         help="Select the group id types on which deduplication needs to be performed"
+                        class="col-lg-12"
                     >
-                        <field name="grp_deduplication_id_types_ids" widget="many2many_tags" />
+                        <field name="grp_deduplication_id_types_ids" class="w-100" editable="bottom">
+                            <tree editable="bottom">
+                                <field name="kind_id" />
+                                <field name="id_type_ids" widget="many2many_tags" required="1" />
+                            </tree>
+                        </field>
                     </setting>
                     <setting
                         string="Individual ID Types"

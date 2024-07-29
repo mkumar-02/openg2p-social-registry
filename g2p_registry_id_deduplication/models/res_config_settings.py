@@ -8,10 +8,13 @@ class RegistryConfig(models.TransientModel):
     _inherit = "res.config.settings"
 
     grp_deduplication_id_types_ids = fields.Many2many(
-        "g2p.id.type",
+        "g2p.group.kind.deduplication.config",
     )
 
-    ind_deduplication_id_types_ids = fields.Many2many("g2p.id.type", "g2p_registry_id_ind_deduplcation")
+    ind_deduplication_id_types_ids = fields.Many2many(
+        "g2p.id.type",
+        "g2p_registry_id_ind_deduplcation_rel",
+    )
 
     def set_values(self):
         res = super().set_values()
