@@ -13,11 +13,11 @@
                     name="web_ribbon"
                     title="Duplicated"
                     bg_color="bg-warning"
-                    invisible="not is_duplicate"
+                    invisible="not is_duplicated"
                 />
             </xpath>
             <xpath expr="//field[@name='kind']" position="after">
-                <field name="is_duplicate" readonly="1" />
+                <field name="is_duplicated" readonly="1" />
             </xpath>
         </field>
     </record>
