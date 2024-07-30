@@ -4,3 +4,5 @@ git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=g2p_re
 git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=g2p_registry_individual
 git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=g2p_registry_group
 git+https://github.com/OpenG2P/openg2p-registry@17.0-develop#subdirectory=g2p_registry_membership
+git+https://github.com/OpenG2P/openg2p-importer@17.0-develop#subdirectory=g2p_odk_importer
+git+https://github.com/OpenG2P/openg2p-service-provider-portal@17.0-develop#subdirectory=g2p_service_provider_portal_base
