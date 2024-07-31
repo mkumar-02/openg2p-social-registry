@@ -108,7 +108,7 @@ class ResPartner(models.Model):
         ir_config = self.env["ir.config_parameter"].sudo()
         id_type_ids_str = ir_config.get_param(f"g2p_registry_id_deduplication.{id_field}", default=None)
 
-        id_type_ids = id_type_ids_str.strip("][").split(", ")
+        id_type_ids = id_type_ids_str.strip("][").split(", ") if id_type_ids_str is not None else [""]
         id_type_ids = id_type_ids if len(id_type_ids[0]) != 0 else []
 
         if len(id_type_ids) < 1:
