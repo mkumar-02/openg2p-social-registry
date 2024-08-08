@@ -51,16 +51,40 @@ class TestResPartnerIDDeduplication(TransactionCase):
 
         # Create registration IDs for partners
         self.reg_id_1 = self.reg_id_model.create(
-            {"partner_id": self.individual_1.id, "id_type": self.id_type_2.id, "value": 12345}
+            {
+                "partner_id": self.individual_1.id,
+                "id_type": self.id_type_2.id,
+                "value": 12345,
+                "status": "invalid",
+                "description": "Failed",
+            }
         )
         self.reg_id_2 = self.reg_id_model.create(
-            {"partner_id": self.individual_2.id, "id_type": self.id_type_2.id, "value": 12345}
+            {
+                "partner_id": self.individual_2.id,
+                "id_type": self.id_type_2.id,
+                "value": 12345,
+                "status": "invalid",
+                "description": "Failed",
+            }
         )
         self.reg_id_3 = self.reg_id_model.create(
-            {"partner_id": self.group_1.id, "id_type": self.id_type_1.id, "value": 123}
+            {
+                "partner_id": self.group_1.id,
+                "id_type": self.id_type_1.id,
+                "value": 123,
+                "status": "invalid",
+                "description": "Failed",
+            }
         )
         self.reg_id_4 = self.reg_id_model.create(
-            {"partner_id": self.group_2.id, "id_type": self.id_type_1.id, "value": 123}
+            {
+                "partner_id": self.group_2.id,
+                "id_type": self.id_type_1.id,
+                "value": 123,
+                "status": "invalid",
+                "description": "Failed",
+            }
         )
 
         # Create group kind deduplication config
