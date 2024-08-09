@@ -9,6 +9,9 @@
             <xpath expr="//field[@name='district']" position="after">
                 <field name="region" />
             </xpath>
+            <xpath expr="//field[@name='registration_date']" position="after">
+                <field name="ref_id" readonly="1" />
+            </xpath>
         </field>
     </record>
 
@@ -19,8 +22,10 @@
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='basic_info']/group/group" position="inside">
-
                     <field name="region" string="Region" />
+            </xpath>
+            <xpath expr="//field[@name='registration_date']" position="after">
+                <field name="ref_id" readonly="1" />
             </xpath>
         </field>
     </record>
