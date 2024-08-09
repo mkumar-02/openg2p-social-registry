@@ -15,7 +15,9 @@
     ],
     "external_dependencies": {},
     "data": [
+        "security/ir.model.access.csv",
         "views/deduplication_view.xml",
+        "views/group_kind_id_type_mapping_view.xml",
         "views/group_view.xml",
         "views/individual_view.xml",
         "views/res_config_view.xml",
@@ -31,4 +33,5 @@
     "application": True,
     "installable": True,
     "auto_install": False,
+    "uninstall_hook": "_uninstall_cleanup",
 }
