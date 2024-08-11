@@ -4,6 +4,7 @@ import logging
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -108,8 +109,7 @@ class ResPartner(models.Model):
         ir_config = self.env["ir.config_parameter"].sudo()
         id_type_ids_str = ir_config.get_param(f"g2p_registry_id_deduplication.{id_field}", default=None)
 
-        id_type_ids = id_type_ids_str.strip("][").split(", ") if id_type_ids_str is not None else [""]
-        id_type_ids = id_type_ids if len(id_type_ids[0]) != 0 else []
+        id_type_ids = safe_eval.safe_eval(id_type_ids_str)
 
         if len(id_type_ids) < 1:
             raise UserError(_("Deduplication is not configured"))

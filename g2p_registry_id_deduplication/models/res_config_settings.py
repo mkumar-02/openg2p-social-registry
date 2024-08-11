@@ -43,3 +43,29 @@ class RegistryConfig(models.TransientModel):
             else None,
         )
         return res
+
+
+class G2PIDType(models.Model):
+    _inherit = "g2p.id.type"
+
+    def unlink(self):
+        ids_to_delete = self.ids
+
+        res = super().unlink()
+
+        ir_config = self.env["ir.config_parameter"].sudo()
+        ind_id_types_param = ir_config.get_param(
+            "g2p_registry_id_deduplication.ind_deduplication_id_types_ids"
+        )
+
+        if ind_id_types_param:
+            ind_id_types_ids = safe_eval.safe_eval(ind_id_types_param)
+            updated_ind_id_types_ids = [
+                id_type for id_type in ind_id_types_ids if id_type not in ids_to_delete
+            ]
+            ir_config.set_param(
+                "g2p_registry_id_deduplication.ind_deduplication_id_types_ids",
+                updated_ind_id_types_ids,
+            )
+
+        return res
