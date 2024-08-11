@@ -132,6 +132,11 @@ msgid "ID"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
+#: model:ir.model,name:g2p_registry_id_deduplication.model_g2p_id_type
+msgid "ID Type"
+msgstr ""
+
+#. module: g2p_registry_id_deduplication
 #: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__id_type_ids
 msgid "ID Types"
 msgstr ""
