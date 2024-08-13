@@ -59,6 +59,11 @@ msgid "ID"
 msgstr ""
 
 #. module: g2p_social_registry
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__iso_code
+msgid "Iso Code"
+msgstr ""
+
+#. module: g2p_social_registry
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__write_uid
 msgid "Last Updated by"
 msgstr ""
