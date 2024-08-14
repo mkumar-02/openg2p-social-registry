@@ -1,7 +1,7 @@
 .o_navbar_apps_menu .dropdown-toggle {
     padding: 0px 14px !important;
 }
-    
+
 .o_navbar_apps_menu.show .dropdown-menu {
     display: flex !important;
     flex-direction: row !important;
@@ -31,7 +31,7 @@
         margin-top: 20px;
         flex: 1 1 calc(100% / 2); // Default to two icons per row
         max-width: calc(100% / 2); // Adjust the max-width to ensure correct wrapping
-        text-align: center; 
+        text-align: center;
         padding: 1rem;
         background: none !important;
 
