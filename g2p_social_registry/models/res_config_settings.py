@@ -1,6 +1,10 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+import logging
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
+
+_logger = logging.getLogger(__name__)
 
 
 class RegistryConfig(models.TransientModel):
@@ -47,3 +51,22 @@ class RegistryConfig(models.TransientModel):
         )
 
         return res
+
+    def add_missing_ref_id_to_retry(self):
+        query = """
+            SELECT id FROM res_partner
+            WHERE is_registrant = TRUE AND ref_id is Null
+        """
+
+        pending_ref_id_model = self.env["g2p.pending.reference_id"]
+
+        try:
+            self._cr.execute(query)  # pylint: disable=sql-injection
+
+            for rec in [record[0] for record in (self._cr.fetchall())]:
+                if not pending_ref_id_model.search([("registrant_id", "=", rec)], limit=1):
+                    pending_ref_id_model.create({"registrant_id": rec, "status": "failed"})
+
+        except Exception as e:
+            _logger.error("Database Query Error: %s", e)
+            raise UserError(_("Database Query Error: %s") % e) from None

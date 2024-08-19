@@ -27,31 +27,29 @@ class ResPartner(models.Model):
         for rec in self:
             try:
                 config = self.env["g2p.reference_id.config"].get_config()
-                
+
                 access_token = config.get_access_token()
                 headers = {"Cookie": f"Authorization={access_token}"}
-                
+
                 response = httpx.get(config.base_api_url, headers=headers, timeout=config.api_timeout)
                 response.raise_for_status()
                 res = response.json()
-                
+
                 unique_id = res.get("response")["uin"]
                 rec.ref_id = rec.get_ref_id_prefix() + unique_id
 
             except Exception as e:
                 _logger.error("Failed to generate ref_id for partner %s: %s", rec.id, str(e))
 
-                pending_ref_id_model = self.env["g2p.pending.reference_id"].browse(rec.id)
+                pending_ref_id_model = self.env["g2p.pending.reference_id"]
 
-                if not pending_ref_id_model.browse(rec.id):
-                    pending_ref_id_model.create(
-                        {"registrant_id": rec.id, "status": "under_process"}
-                    )
+                if not pending_ref_id_model.search([("registrant_id", "=", rec.id)]):
+                    pending_ref_id_model.create({"registrant_id": rec.id, "status": "failed"})
 
     def get_ref_id_prefix(self):
         for rec in self:
             if not rec.is_registrant:
                 return ""
             if rec.is_group:
-                return "GRP"
-            return "IND"
+                return "GRP-"
+            return "IND-"
