@@ -14,11 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: g2p_registry_id_deduplication
-#: model_terms:ir.actions.act_window,help:g2p_registry_id_deduplication.action_id_deduplication_criteria
-msgid "Add an Deduplication Criteria!"
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
 #: model_terms:ir.actions.act_window,help:g2p_registry_id_deduplication.action_duplicate_groups
 msgid "Check duplicates group registrant!"
 msgstr ""
@@ -26,11 +21,6 @@ msgstr ""
 #. module: g2p_registry_id_deduplication
 #: model_terms:ir.actions.act_window,help:g2p_registry_id_deduplication.action_duplicate_individuals
 msgid "Check duplicates individual registrant!"
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
-#: model_terms:ir.actions.act_window,help:g2p_registry_id_deduplication.action_id_deduplication_criteria
-msgid "Click the new button to enter a new deduplication criteria."
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
@@ -44,18 +34,13 @@ msgid "Contact"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__create_uid
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__create_date
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__create_date
 msgid "Created on"
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__name
-msgid "Criteria Name"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
@@ -69,11 +54,6 @@ msgid "Database Query Error: %s"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_config_settings__dedup_criteria_id
-msgid "Dedup Criteria"
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
 #. odoo-javascript
 #: code:addons/g2p_registry_id_deduplication/static/src/xml/duplicate_template.xml:0
 #: code:addons/g2p_registry_id_deduplication/static/src/xml/duplicate_template.xml:0
@@ -82,20 +62,19 @@ msgid "Deduplicate"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.actions.act_window,name:g2p_registry_id_deduplication.action_id_deduplication_criteria
-#: model:ir.ui.menu,name:g2p_registry_id_deduplication.g2p_id_dedupliation_config
-msgid "Deduplication Criteria"
+#: model:ir.model,name:g2p_registry_id_deduplication.model_g2p_group_kind_deduplication_config
+msgid "Deduplication Mapping between Group Kind and ID Types"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
 #. odoo-python
 #: code:addons/g2p_registry_id_deduplication/models/registrant.py:0
 #, python-format
-msgid "Deduplication configuration not found."
+msgid "Deduplication is not configured"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__display_name
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -128,18 +107,13 @@ msgid "Duplicates"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.view_id_deduplication_criteria_form
-msgid "Enter the Criteria Name..."
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
 #: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.openg2p_inherit_res_config_settings_view_form
 msgid "G2P Registry Deduplication Settings"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.view_id_deduplication_criteria_form
-msgid "Group"
+#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.openg2p_inherit_res_config_settings_view_form
+msgid "Group ID Types"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
@@ -148,24 +122,33 @@ msgid "Groups"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__id
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_config_settings__grp_deduplication_id_types_ids
+msgid "Grp Deduplication Id Types"
+msgstr ""
+
+#. module: g2p_registry_id_deduplication
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__id
 msgid "ID"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.openg2p_inherit_res_config_settings_view_form
-msgid "ID Deduplication Criteria"
+#: model:ir.model,name:g2p_registry_id_deduplication.model_g2p_id_type
+msgid "ID Type"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__grp_id_types
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__ind_id_types
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__id_type_ids
 msgid "ID Types"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.view_id_deduplication_criteria_form
-msgid "Individual"
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_config_settings__ind_deduplication_id_types_ids
+msgid "Ind Deduplication Id Types"
+msgstr ""
+
+#. module: g2p_registry_id_deduplication
+#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.openg2p_inherit_res_config_settings_view_form
+msgid "Individual ID Types"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
@@ -174,18 +157,23 @@ msgid "Individuals"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_partner__is_duplicate
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_users__is_duplicate
-msgid "Is Duplicate"
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_partner__is_duplicated
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_res_users__is_duplicated
+msgid "Is Duplicated"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__write_uid
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__kind_id
+msgid "Kind"
+msgstr ""
+
+#. module: g2p_registry_id_deduplication
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_registry_id_deduplication_criteria__write_date
+#: model:ir.model.fields,field_description:g2p_registry_id_deduplication.field_g2p_group_kind_deduplication_config__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -197,36 +185,25 @@ msgid "Manoj"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.view_id_deduplication_criteria_form
-msgid "Name:"
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
 #. odoo-python
 #: code:addons/g2p_registry_id_deduplication/models/registrant.py:0
-#, python-format
-msgid "No ID Types found in the Deduplication Configuration."
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
-#. odoo-python
 #: code:addons/g2p_registry_id_deduplication/models/registrant.py:0
 #, python-format
-msgid ""
-"No deduplication criteria configured. Please configure it in the settings."
-msgstr ""
-
-#. module: g2p_registry_id_deduplication
-#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.view_id_deduplication_criteria_form
-msgid "Registry ID Deduplication Criteria"
+msgid "No Configured ID Types found in the System"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
 #: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.openg2p_inherit_res_config_settings_view_form
-msgid "Select the criteria on which deduplication needs to be performed"
+msgid "Select the group id types on which deduplication needs to be performed"
 msgstr ""
 
 #. module: g2p_registry_id_deduplication
-#: model:ir.model,name:g2p_registry_id_deduplication.model_g2p_registry_id_deduplication_criteria
-msgid "g2p.registry.id.deduplication_criteria"
+#: model_terms:ir.ui.view,arch_db:g2p_registry_id_deduplication.openg2p_inherit_res_config_settings_view_form
+msgid ""
+"Select the individual id types on which deduplication needs to be performed"
+msgstr ""
+
+#. module: g2p_registry_id_deduplication
+#: model:ir.model.constraint,message:g2p_registry_id_deduplication.constraint_g2p_group_kind_deduplication_config_unique_group_kind
+msgid "The Kind must be unique."
 msgstr ""

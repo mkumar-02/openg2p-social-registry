@@ -13,7 +13,7 @@
         <field name="context">
             {'default_is_registrant':True,'default_is_group':True,'registrant_form':True,'create':0}</field>
         <field name="domain">[('is_registrant', '=',
-            True),('is_group','=',True),('is_duplicate','=',True)]</field>
+            True),('is_group','=',True),('is_duplicated','=',True)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Check duplicates group registrant!
@@ -31,7 +31,7 @@
         <field name="context">
             {'default_is_registrant':True,'default_is_group':False,'registrant_form':True,'create':0}</field>
         <field name="domain">
-            [('is_registrant','=',True),('is_group','=',False),('is_duplicate','=',True)]</field>
+            [('is_registrant','=',True),('is_group','=',False),('is_duplicated','=',True)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Check duplicates individual registrant!
