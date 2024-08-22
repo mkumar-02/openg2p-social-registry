@@ -2,7 +2,7 @@ import logging
 import os
 from datetime import datetime
 
-import httpx
+import requests
 from jose import jwt
 
 from odoo import _, api, fields, models
@@ -11,13 +11,13 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 ID_GENERATOR_API_BASE_URL = os.getenv(
-    "ID_GENERATOR_API_BASE_URL", "https://api-internal.dev.mosip.net/v1/idgenerator/uin"
+    "ID_GENERATOR_API_BASE_URL", "https://idgenerator.sandbox.net/v1/idgenerator/uin"
 )
 ID_GENERATOR_AUTH_URL = os.getenv(
     "ID_GENERATOR_AUTH_URL",
-    "https://api-internal.dev.mosip.net/v1/authmanager/authenticate/clientidsecretkey",
+    "https://keycloak.openg2p.org/realms/master/protocol/openid-connect/token",
 )
-ID_GENERATOR_AUTH_CLIENT_ID = os.getenv("ID_GENERATOR_AUTH_CLIENT_ID", "mosip-idrepo-client")
+ID_GENERATOR_AUTH_CLIENT_ID = os.getenv("ID_GENERATOR_AUTH_CLIENT_ID", "")
 ID_GENERATOR_AUTH_CLIENT_SECRET = os.getenv("ID_GENERATOR_AUTH_CLIENT_SECRET", "")
 ID_GENERATOR_AUTH_GRANT_TYPE = os.getenv("ID_GENERATOR_AUTH_GRANT_TYPE", "client_credentials")
 
@@ -48,26 +48,19 @@ class FallbackTable(models.Model):
             return self.access_token
 
         if not self.auth_url:
-            raise UserError(_("Authentication URL is not set"))
+            raise UserError(_("ID Generator Authentication URL is not set"))
 
-        headers = {"Content-Type": "application/json"}
         data = {
-            "id": "string",
-            "version": "string",
-            "requesttime": "2024-07-11T05:10:53.449Z",
-            "metadata": {},
-            "request": {
-                "clientId": self.auth_client_id,
-                "secretKey": self.auth_client_secret,
-                "appId": "idrepo",
-            },
+            "grant_type": self.auth_grant_type,
+            "client_id": self.auth_client_id,
+            "client_secret": self.auth_client_secret,
         }
 
-        response = httpx.post(self.auth_url, headers=headers, json=data, timeout=self.api_timeout)
+        response = requests.post(self.auth_url, data=data, timeout=self.api_timeout)
         _logger.debug("ID Generator Authentication API response: %s", response.text)
         response.raise_for_status()
 
-        access_token = response.cookies.get("Authorization")
+        access_token = response.json().get("access_token", None)
         token_exp = jwt.get_unverified_claims(access_token).get("exp")
 
         self.write(

@@ -1,6 +1,6 @@
 import logging
 
-import httpx
+import requests
 
 from odoo import api, fields, models
 
@@ -31,7 +31,8 @@ class ResPartner(models.Model):
                 access_token = config.get_access_token()
                 headers = {"Cookie": f"Authorization={access_token}"}
 
-                response = httpx.get(config.base_api_url, headers=headers, timeout=config.api_timeout)
+                response = requests.get(config.base_api_url, headers=headers, timeout=config.api_timeout)
+                _logger.debug("ID Generator API response: %s", response.text)
                 response.raise_for_status()
                 res = response.json()
 
