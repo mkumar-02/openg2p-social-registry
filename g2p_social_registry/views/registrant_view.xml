@@ -9,9 +9,9 @@
             <xpath expr="//field[@name='district']" position="after">
                 <field name="region" />
             </xpath>
-            <xpath expr="//field[@name='registration_date']" position="after">
+            <!-- <xpath expr="//field[@name='registration_date']" position="after">
                 <field name="ref_id" readonly="1" />
-            </xpath>
+            </xpath> -->
         </field>
     </record>
 
@@ -24,9 +24,9 @@
             <xpath expr="//page[@name='basic_info']/group/group" position="inside">
                     <field name="region" string="Region" />
             </xpath>
-            <xpath expr="//field[@name='registration_date']" position="after">
+            <!-- <xpath expr="//field[@name='registration_date']" position="after">
                 <field name="ref_id" readonly="1" />
-            </xpath>
+            </xpath> -->
         </field>
     </record>
 
