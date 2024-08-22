@@ -9,3 +9,4 @@ class G2PRegion(models.Model):
 
     name = fields.Char()
     code = fields.Char()
+    iso_code = fields.Char()
