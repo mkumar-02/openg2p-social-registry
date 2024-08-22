@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 g2p_region_admin,Region Admin Access,g2p_social_registry.model_g2p_region,g2p_registry_base.group_g2p_admin,1,1,1,1
 g2p_region_registrar,Region Registrar Access,g2p_social_registry.model_g2p_region,,1,0,0,0
+g2p_pending_reference_id_admin,Pending Reference ID Admin Access,g2p_social_registry.model_g2p_pending_reference_id,g2p_registry_base.group_g2p_admin,1,1,1,1
+g2p_pending_reference_id_registrar,Pending Reference ID Registrar Access,g2p_social_registry.model_g2p_pending_reference_id,,1,0,0,0
+g2p_reference_id_config_admin,Reference ID Config Admin Access,g2p_social_registry.model_g2p_reference_id_config,g2p_registry_base.group_g2p_admin,1,1,1,1
+g2p_reference_id_config_registrar,Reference ID Config Registrar Access,g2p_social_registry.model_g2p_reference_id_config,,1,0,0,0

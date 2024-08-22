@@ -9,6 +9,9 @@
             <xpath expr="//field[@name='district']" position="after">
                 <field name="region" />
             </xpath>
+            <!-- <xpath expr="//field[@name='registration_date']" position="after">
+                <field name="ref_id" readonly="1" />
+            </xpath> -->
         </field>
     </record>
 
@@ -19,9 +22,19 @@
         <field name="inherit_id" ref="g2p_registry_group.view_groups_form" />
         <field name="arch" type="xml">
             <xpath expr="//page[@name='basic_info']/group/group" position="inside">
-
                     <field name="region" string="Region" />
             </xpath>
+            <!-- <xpath expr="//field[@name='registration_date']" position="after">
+                <field name="ref_id" readonly="1" />
+            </xpath> -->
         </field>
+    </record>
+
+    <record model="ir.actions.server" id="generate_ref_id">
+        <field name="name">Generate Reference ID</field>
+        <field name="model_id" ref="g2p_social_registry.model_g2p_pending_reference_id" />
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="state">code</field>
+        <field name="code">action = model.generate_ref_id_for_selected()</field>
     </record>
 </odoo>
