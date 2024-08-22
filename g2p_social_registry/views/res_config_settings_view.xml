@@ -39,7 +39,7 @@
                         <field name="id_generator_auth_client_id" />
                     </setting>
                     <setting string="Auth Client Secret" help="Provide the auth client secret">
-                        <field name="id_generator_auth_client_secret" />
+                        <field name="id_generator_auth_client_secret" password="True" />
                     </setting>
                     <setting string="API Timeout" help="Provide the API Timeout">
                         <field name="id_generator_api_timeout" />
