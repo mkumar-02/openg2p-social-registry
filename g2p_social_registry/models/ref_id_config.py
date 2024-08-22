@@ -22,7 +22,7 @@ ID_GENERATOR_AUTH_CLIENT_SECRET = os.getenv("ID_GENERATOR_AUTH_CLIENT_SECRET", "
 ID_GENERATOR_AUTH_GRANT_TYPE = os.getenv("ID_GENERATOR_AUTH_GRANT_TYPE", "client_credentials")
 
 
-class FallbackTable(models.Model):
+class G2PReferenceIdconfig(models.Model):
     _name = "g2p.reference_id.config"
     _description = "G2P Reference ID Configuration"
 

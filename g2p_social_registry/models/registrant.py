@@ -1,3 +1,5 @@
+# Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+
 import logging
 
 import requests
@@ -38,7 +40,7 @@ class ResPartner(models.Model):
                 res = response.json()
 
                 unique_id = res.get("response")["uin"]
-                rec.ref_id = rec.get_ref_id_prefix() + unique_id
+                rec.ref_id = rec.get_ref_id_prefix() + unique_id if rec.get_ref_id_prefix() else unique_id
 
             except Exception as e:
                 _logger.error("Failed to generate ref_id for partner %s: %s", rec.id, str(e))
@@ -49,9 +51,5 @@ class ResPartner(models.Model):
                     pending_ref_id_model.create({"registrant_id": rec.id, "status": "failed"})
 
     def get_ref_id_prefix(self):
-        for rec in self:
-            if not rec.is_registrant:
-                return ""
-            if rec.is_group:
-                return "GRP-"
-            return "IND-"
+        # Override this method for customization
+        return
