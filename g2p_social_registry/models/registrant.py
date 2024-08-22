@@ -20,7 +20,8 @@ class ResPartner(models.Model):
     @api.model
     def create(self, vals):
         record = super().create(vals)
-        record.generate_ref_id()
+        if vals.get("is_registrant"):
+            record.generate_ref_id()
         return record
 
     def generate_ref_id(self):
