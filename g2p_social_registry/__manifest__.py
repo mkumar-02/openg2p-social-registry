@@ -13,7 +13,7 @@
         "g2p_registry_individual",
         "g2p_registry_membership",
     ],
-    "external_dependencies": {},
+    "external_dependencies": {"python": ["python-jose"]},
     "data": [
         "security/ir.model.access.csv",
         "data/cron_job.xml",
