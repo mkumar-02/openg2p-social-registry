@@ -1,4 +1,5 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+
 import logging
 
 from odoo import _, api, fields, models

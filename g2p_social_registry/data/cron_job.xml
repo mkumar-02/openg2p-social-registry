@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
 <odoo>
     <record id="ir_cron_retry_ref_id_job" model="ir.cron">
         <field name="name">Reference ID Generation Cron Job</field>
