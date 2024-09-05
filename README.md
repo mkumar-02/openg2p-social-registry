@@ -22,9 +22,6 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[g2p_odk_user_mapping](g2p_odk_user_mapping/) | 17.0.0.0.0 |  | ODK App User Mapping
-[g2p_portal_base](g2p_portal_base/) | 17.0.0.0.0 |  | G2P Registration Portal: Base
-[g2p_registration_portal](g2p_registration_portal/) | 17.0.0.0.0 |  | G2P Registration Portal Beneficiary Management
 [g2p_registry_g2p_connect_rest_api](g2p_registry_g2p_connect_rest_api/) | 17.0.0.0.0 |  | OpenG2P Registry: G2P Connect REST API
 [g2p_registry_id_deduplication](g2p_registry_id_deduplication/) | 17.0.0.0.0 |  | OpenG2P Registry ID Deduplication
 [g2p_social_registry](g2p_social_registry/) | 17.0.0.0.0 |  | OpenG2P Social Registry
