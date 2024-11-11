@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [g2p_social_registry](g2p_social_registry/) | 17.0.0.0.0 |  | OpenG2P Social Registry
 [g2p_social_registry_dashboard](g2p_social_registry_dashboard/) | 17.0.0.0.0 |  | OpenG2P Social Registry: Dashboard
 [g2p_social_registry_model](g2p_social_registry_model/) | 17.0.0.0.0 |  | G2P Social Registry: Demo
+[g2p_social_registry_proxy_means_test](g2p_social_registry_proxy_means_test/) | 17.0.0.0.0 |  | G2P Social Registry: PMT
 [g2p_social_registry_theme](g2p_social_registry_theme/) | 17.0.0.0.0 |  | OpenG2P Social Registry: Theme
 
 [//]: # (end addons)
