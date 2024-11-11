@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="g2p_social_registry_dashboard.dashboard_template">
+        <div style="overflow-y: auto; max-height: 100vh; padding: 20px; padding-bottom: 50px">
+            <!-- Header Section -->
+            <div>
+                <center>
+                    <h1 style="margin: 20px 0;">SR Dashboard</h1>
+                </center>
+            </div>
+
+            <!-- Main Section with Tiles and Pie Chart -->
+            <div
+                class="row main-section"
+                style="display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;"
+            >
+
+                <!-- Household Tile -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="oh-card" style="box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);">
+                        <div class="oh-card-body text-center" style="padding: 20px;">
+                            <h5 style="font-weight: bold;">Groups</h5>
+                            <div id="my_groups">
+                                <span class="loader" role="status" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Individuals Tile -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="oh-card" style="box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);">
+                        <div class="oh-card-body text-center" style="padding: 20px;">
+                            <h5 style="font-weight: bold;">Individuals</h5>
+                            <div id="my_individuals">
+                                <span class="spinner-border spinner-border-sm" role="status" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gender Distribution Pie Chart -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="oh-card" style="box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);">
+                        <div class="oh-card-body text-center" style="padding: 20px;">
+                            <h5 style="font-weight: bold;">Gender Distribution</h5>
+                            <div id="gender_pie_chart_container">
+                                <span class="spinner-border spinner-border-sm" role="status" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age Distribution Bar Chart -->
+                <div class="col-md-4 col-sm-6">
+                    <div class="oh-card" style="box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);">
+                        <div class="oh-card-body text-center" style="padding: 20px;">
+                            <h5 style="font-weight: bold;">Age Distribution</h5>
+                            <div id="age_bar_chart_container">
+                                <span class="spinner-border spinner-border-sm" role="status" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </t>
+</templates>
