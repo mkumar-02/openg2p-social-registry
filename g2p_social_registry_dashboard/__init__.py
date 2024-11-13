@@ -149,15 +149,15 @@ def drop_materialized_view(env):
     cr = env.cr
 
     matviews_to_drop = [
+        "g2p_sr_dashboard_data",
         "g2p_gender_count_view",
         "g2p_age_distribution_view",
         "g2p_total_registrants_view",
-        "g2p_sr_dashboard_data",
     ]
 
     try:
         for matview in matviews_to_drop:
-            cr.execute(f"DROP MATERIALIZED VIEW IF EXISTS {matview};")  # pylint: disable=sql-injection
+            cr.execute(f"DROP MATERIALIZED VIEW IF EXISTS {matview} CASCADE;")  # pylint: disable=sql-injection
             _logger.info("Dropped materialized view: %s", matview)
 
     except Exception as exc:
