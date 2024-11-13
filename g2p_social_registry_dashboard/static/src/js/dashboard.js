@@ -1,100 +1,49 @@
 /** @odoo-module **/
-import {Component} from "@odoo/owl";
+import {Component, useState} from "@odoo/owl";
+import {ChartComponent} from "../components/chart/chart";
+import {KpiComponent} from "../components/kpi/kpi";
 import {registry} from "@web/core/registry";
 import {useService} from "@web/core/utils/hooks";
-
-const actionRegistry = registry.category("actions");
 
 class SRDashboard extends Component {
     setup() {
         super.setup();
         this.orm = useService("orm");
-        this._fetch_data();
+        this.dashboard_title = "SR Dashboard";
+
+        this.dashboard_data = useState({
+            total_groups: 0,
+            total_individuals: 0,
+            gender_distribution_keys: [],
+            gender_distribution_values: [],
+            age_distribution_keys: [],
+            age_distribution_values: [],
+        });
+
+        this.dataLoaded = useState({flag: false});
+
+        this.fetchData();
     }
 
-    _fetch_data() {
-        // Add loading spinners to tiles
-        $("#my_individuals").html('<div class="loader"></div>');
-        $("#my_groups").html('<div class="spinner-border" role="status"></div>');
-        $("#gender_pie_chart_container").html('<div class="spinner-border" role="status"></div>');
-        $("#age_bar_chart_container").html('<div class="spinner-border" role="status"></div>');
+    async fetchData() {
+        try {
+            const data = await this.orm.call("res.partner", "get_dashboard_data", []);
 
-        this.orm.call("res.partner", "get_dashboard_data", [], {}).then((result) => {
-            // Update tiles with fetched data
-            $("#my_individuals").html("<span>" + result.total_individuals + "</span>");
-            $("#my_groups").html("<span>" + result.total_groups + "</span>");
-            $("#gender_pie_chart_container").html(
-                '<canvas id="gender_pie_chart" width="150" height="150"></canvas>'
-            );
-            this.renderGenderPieChart(result.gender_distribution);
+            data.gender_distribution_keys = Object.keys(data.gender_distribution);
+            data.gender_distribution_values = Object.values(data.gender_distribution);
+            data.age_distribution_keys = Object.keys(data.age_distribution);
+            data.age_distribution_values = Object.values(data.age_distribution);
 
-            // Update age distribution chart
-            $("#age_bar_chart_container").html(
-                '<canvas id="age_bar_chart" width="400" height="200"></canvas>'
-            );
-            this.renderAgeBarChart(result.age_distribution);
-        });
-    }
+            Object.assign(this.dashboard_data, data);
 
-    renderGenderPieChart(data) {
-        const ctx = document.getElementById("gender_pie_chart").getContext("2d");
-        new Chart(ctx, {
-            type: "pie",
-            data: {
-                labels: ["Male", "Female"],
-                datasets: [
-                    {
-                        data: [data.male, data.female],
-                        backgroundColor: ["#4e73df", "#1cc88a"],
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: "top",
-                    },
-                },
-            },
-        });
-    }
-
-    renderAgeBarChart(data) {
-        const ctx = document.getElementById("age_bar_chart").getContext("2d");
-        const labels = Object.keys(data);
-        const values = Object.values(data);
-
-        new Chart(ctx, {
-            type: "bar",
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: "Age Distribution",
-                        data: values,
-                        backgroundColor: "#4e73df",
-                        borderColor: "#4e73df",
-                        borderWidth: 1,
-                    },
-                ],
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                    },
-                },
-                plugins: {
-                    legend: {
-                        position: "top",
-                    },
-                },
-            },
-        });
+            this.dataLoaded.flag = true;
+        } catch (error) {
+            console.error("Error fetching dashboard data:", error);
+        }
     }
 }
 
 SRDashboard.template = "g2p_social_registry_dashboard.dashboard_template";
-actionRegistry.add("sr_dashboard_tag", SRDashboard);
+SRDashboard.components = {ChartComponent, KpiComponent};
+
+registry.category("actions").add("g2p_social_registry_dashboard.sr_dashboard_tag", SRDashboard);

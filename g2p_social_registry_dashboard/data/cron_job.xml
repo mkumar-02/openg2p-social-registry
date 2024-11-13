@@ -9,7 +9,7 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
         <field name="state">code</field>
         <field name="code">model._refresh_dashboard_materialized_view()</field>
         <field name="interval_number">10</field>
-        <field name="interval_type">minutes</field>
+        <field name="interval_type">hours</field>
         <field name="numbercall">-1</field>
         <field name="doall" eval="False" />
         <field name="active" eval="True" />

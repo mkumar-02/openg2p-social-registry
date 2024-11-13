@@ -12,10 +12,10 @@
     "data": ["data/cron_job.xml", "views/menu.xml"],
     "assets": {
         "web.assets_backend": [
-            "https://cdn.jsdelivr.net/npm/chart.js",
+            "g2p_social_registry_dashboard/static/src/components/chart/**/*",
+            "g2p_social_registry_dashboard/static/src/components/kpi/**/*",
             "g2p_social_registry_dashboard/static/src/js/dashboard.js",
             "g2p_social_registry_dashboard/static/src/xml/dashboard.xml",
-            "g2p_social_registry_dashboard/static/src/scss/dashboard.scss",
         ],
     },
     "demo": [],
