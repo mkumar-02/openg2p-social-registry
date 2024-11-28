@@ -9,7 +9,6 @@ class G2PQueIDGeneration(models.Model):
     registrant_id = fields.Char(
         string="Registrant ID",
         required=True,
-        unique=True,
     )
 
     id_generation_request_status = fields.Selection(
@@ -68,3 +67,6 @@ class G2PQueIDGeneration(models.Model):
         string="Last Attempt Datetime (Update)"
     )
 
+    _sql_constraints = [
+        ("registrant_id_uniq", "UNIQUE(registrant_id)", "registrant_id is an unique identifier!"),
+    ]
