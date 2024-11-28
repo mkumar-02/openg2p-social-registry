@@ -2,8 +2,6 @@
 
 import logging
 
-import requests
-
 from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
@@ -30,5 +28,10 @@ class ResPartner(models.Model):
         for rec in self:
             g2p_que_id_model = self.env["g2p.que.id.generation"]
             if not g2p_que_id_model.search([("registrant_id", "=", rec.id)]):
-                g2p_que_id_model.create({"registrant_id": rec.id, "id_generation_request_status": "pending",
-                                         "id_generation_update_status": "not_applicable"})
+                g2p_que_id_model.create(
+                    {
+                        "registrant_id": rec.id,
+                        "id_generation_request_status": "pending",
+                        "id_generation_update_status": "not_applicable",
+                    }
+                )

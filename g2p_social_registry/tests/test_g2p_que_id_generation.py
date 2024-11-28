@@ -1,7 +1,5 @@
-from odoo.tests import TransactionCase
-from odoo.exceptions import ValidationError
 from odoo import fields
-from psycopg2 import IntegrityError
+from odoo.tests import TransactionCase
 
 
 class TestG2PQueIDGeneration(TransactionCase):
@@ -26,45 +24,43 @@ class TestG2PQueIDGeneration(TransactionCase):
         """
         self.assertTrue(self.g2p_queue, "G2PQueIDGeneration record was not created.")
         self.assertEqual(
-            self.g2p_queue.registrant_id, str(self.partner1.id),
-            "Registrant ID does not match the expected partner."
+            self.g2p_queue.registrant_id,
+            str(self.partner1.id),
+            "Registrant ID does not match the expected partner.",
         )
         self.assertEqual(
-            self.g2p_queue.id_generation_request_status, "pending",
-            "Default ID Generation Request Status should be 'pending'."
+            self.g2p_queue.id_generation_request_status,
+            "pending",
+            "Default ID Generation Request Status should be 'pending'.",
         )
         self.assertEqual(
-            self.g2p_queue.id_generation_update_status, "not_applicable",
-            "Default ID Generation Update Status should be 'not_applicable'."
+            self.g2p_queue.id_generation_update_status,
+            "not_applicable",
+            "Default ID Generation Update Status should be 'not_applicable'.",
         )
         self.assertEqual(
-            self.g2p_queue.number_of_attempts_request, 0,
-            "Default number_of_attempts_request should be 0."
+            self.g2p_queue.number_of_attempts_request, 0, "Default number_of_attempts_request should be 0."
         )
         self.assertEqual(
-            self.g2p_queue.number_of_attempts_update, 0,
-            "Default number_of_attempts_update should be 0."
+            self.g2p_queue.number_of_attempts_update, 0, "Default number_of_attempts_update should be 0."
         )
         self.assertFalse(
             self.g2p_queue.last_attempt_error_code_request,
-            "last_attempt_error_code_request should be empty by default."
+            "last_attempt_error_code_request should be empty by default.",
         )
         self.assertFalse(
             self.g2p_queue.last_attempt_error_code_update,
-            "last_attempt_error_code_update should be empty by default."
+            "last_attempt_error_code_update should be empty by default.",
         )
         self.assertFalse(
             self.g2p_queue.last_attempt_datetime_request,
-            "last_attempt_datetime_request should be empty by default."
+            "last_attempt_datetime_request should be empty by default.",
         )
         self.assertFalse(
             self.g2p_queue.last_attempt_datetime_update,
-            "last_attempt_datetime_update should be empty by default."
+            "last_attempt_datetime_update should be empty by default.",
         )
-        self.assertTrue(
-            self.g2p_queue.queued_datetime,
-            "queued_datetime should be set by default."
-        )
+        self.assertTrue(self.g2p_queue.queued_datetime, "queued_datetime should be set by default.")
 
     def test_multiple_g2p_queue_records(self):
         """
@@ -82,26 +78,27 @@ class TestG2PQueIDGeneration(TransactionCase):
 
         self.assertTrue(record2, "Second G2PQueIDGeneration record was not created.")
         self.assertEqual(
-            record2.registrant_id, str(self.partner2.id),
-            "Registrant ID for the second record does not match the expected partner."
+            record2.registrant_id,
+            str(self.partner2.id),
+            "Registrant ID for the second record does not match the expected partner.",
         )
         self.assertEqual(
-            record2.id_generation_request_status, "approved",
-            "ID Generation Request Status should be 'approved'."
+            record2.id_generation_request_status,
+            "approved",
+            "ID Generation Request Status should be 'approved'.",
         )
         self.assertEqual(
-            record2.id_generation_update_status, "in_progress",
-            "ID Generation Update Status should be 'in_progress'."
+            record2.id_generation_update_status,
+            "in_progress",
+            "ID Generation Update Status should be 'in_progress'.",
         )
 
         self.assertEqual(
-            record2.last_attempt_error_code_request, "ERR001",
-            "last_attempt_error_code_request should be 'ERR001'."
+            record2.last_attempt_error_code_request,
+            "ERR001",
+            "last_attempt_error_code_request should be 'ERR001'.",
         )
-        self.assertTrue(
-            record2.last_attempt_datetime_request,
-            "last_attempt_datetime_request should be set."
-        )
+        self.assertTrue(record2.last_attempt_datetime_request, "last_attempt_datetime_request should be set.")
 
     def test_field_assignments(self):
         """
@@ -116,18 +113,18 @@ class TestG2PQueIDGeneration(TransactionCase):
         )
 
         self.assertEqual(
-            self.g2p_queue.id_generation_request_status, "approved",
-            "ID Generation Request Status should be updated to 'approved'."
+            self.g2p_queue.id_generation_request_status,
+            "approved",
+            "ID Generation Request Status should be updated to 'approved'.",
         )
         self.assertEqual(
-            self.g2p_queue.id_generation_update_status, "completed",
-            "ID Generation Update Status should be updated to 'completed'."
+            self.g2p_queue.id_generation_update_status,
+            "completed",
+            "ID Generation Update Status should be updated to 'completed'.",
         )
         self.assertEqual(
-            self.g2p_queue.number_of_attempts_request, 1,
-            "number_of_attempts_request should be updated to 1."
+            self.g2p_queue.number_of_attempts_request, 1, "number_of_attempts_request should be updated to 1."
         )
-
 
     def test_default_values_on_creation(self):
         """
@@ -140,38 +137,35 @@ class TestG2PQueIDGeneration(TransactionCase):
         )
 
         self.assertEqual(
-            new_record.id_generation_request_status, "pending",
-            "Default ID Generation Request Status should be 'pending'."
+            new_record.id_generation_request_status,
+            "pending",
+            "Default ID Generation Request Status should be 'pending'.",
         )
         self.assertEqual(
-            new_record.id_generation_update_status, "not_applicable",
-            "Default ID Generation Update Status should be 'not_applicable'."
+            new_record.id_generation_update_status,
+            "not_applicable",
+            "Default ID Generation Update Status should be 'not_applicable'.",
         )
         self.assertEqual(
-            new_record.number_of_attempts_request, 0,
-            "Default number_of_attempts_request should be 0."
+            new_record.number_of_attempts_request, 0, "Default number_of_attempts_request should be 0."
         )
         self.assertEqual(
-            new_record.number_of_attempts_update, 0,
-            "Default number_of_attempts_update should be 0."
+            new_record.number_of_attempts_update, 0, "Default number_of_attempts_update should be 0."
         )
         self.assertFalse(
             new_record.last_attempt_error_code_request,
-            "last_attempt_error_code_request should be empty by default."
+            "last_attempt_error_code_request should be empty by default.",
         )
         self.assertFalse(
             new_record.last_attempt_error_code_update,
-            "last_attempt_error_code_update should be empty by default."
+            "last_attempt_error_code_update should be empty by default.",
         )
         self.assertFalse(
             new_record.last_attempt_datetime_request,
-            "last_attempt_datetime_request should be empty by default."
+            "last_attempt_datetime_request should be empty by default.",
         )
         self.assertFalse(
             new_record.last_attempt_datetime_update,
-            "last_attempt_datetime_update should be empty by default."
+            "last_attempt_datetime_update should be empty by default.",
         )
-        self.assertTrue(
-            new_record.queued_datetime,
-            "queued_datetime should be set by default."
-        )
+        self.assertTrue(new_record.queued_datetime, "queued_datetime should be set by default.")
