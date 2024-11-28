@@ -1,7 +1,7 @@
 from odoo.tests import TransactionCase
 from odoo.exceptions import ValidationError
 from odoo import fields
-from odoo.sql_db import IntegrityError
+from psycopg2 import IntegrityError
 
 
 class TestG2PQueIDGeneration(TransactionCase):
