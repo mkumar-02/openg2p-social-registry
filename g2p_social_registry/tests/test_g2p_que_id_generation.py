@@ -1,5 +1,6 @@
 from odoo.tests import TransactionCase
 from odoo.exceptions import ValidationError
+from odoo import fields
 
 
 class TestG2PQueIDGeneration(TransactionCase):
@@ -25,7 +26,7 @@ class TestG2PQueIDGeneration(TransactionCase):
         """
         self.assertTrue(self.g2p_queue, "G2PQueIDGeneration record was not created.")
         self.assertEqual(
-            self.g2p_queue.registrant_id, self.partner1,
+            self.g2p_queue.registrant_id, self.partner1.id,
             "Registrant ID does not match the expected partner."
         )
         self.assertEqual(
@@ -95,7 +96,7 @@ class TestG2PQueIDGeneration(TransactionCase):
 
         self.assertTrue(record2, "Second G2PQueIDGeneration record was not created.")
         self.assertEqual(
-            record2.registrant_id, self.partner2,
+            record2.registrant_id, self.partner2.id,
             "Registrant ID for the second record does not match the expected partner."
         )
         self.assertEqual(
