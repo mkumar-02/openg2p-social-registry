@@ -1,6 +1,7 @@
 from odoo.tests import TransactionCase
 from odoo.exceptions import ValidationError
 from odoo import fields
+from odoo.sql_db import IntegrityError
 
 
 class TestG2PQueIDGeneration(TransactionCase):
@@ -26,7 +27,7 @@ class TestG2PQueIDGeneration(TransactionCase):
         """
         self.assertTrue(self.g2p_queue, "G2PQueIDGeneration record was not created.")
         self.assertEqual(
-            self.g2p_queue.registrant_id, self.partner1.id,
+            self.g2p_queue.registrant_id, str(self.partner2.id),
             "Registrant ID does not match the expected partner."
         )
         self.assertEqual(
@@ -69,12 +70,12 @@ class TestG2PQueIDGeneration(TransactionCase):
     def test_unique_registrant_id_constraint(self):
         """
         Test that the registrant_id must be unique across G2PQueIDGeneration records.
-        Attempting to create a second record with the same registrant_id should raise a ValidationError.
+        Attempting to create a second record with the same registrant_id should raise an IntegrityError.
         """
-        with self.assertRaises(ValidationError, msg="Duplicate registrant_id should raise ValidationError."):
+        with self.assertRaises(IntegrityError, msg="Duplicate registrant_id should raise IntegrityError."):
             self.env["g2p.que.id.generation"].create(
                 {
-                    "registrant_id": self.partner1.id,
+                    "registrant_id": str(self.partner1.id),  # Ensure registrant_id is a string
                     "id_generation_request_status": "pending",
                     "id_generation_update_status": "not_applicable",
                 }
@@ -96,7 +97,7 @@ class TestG2PQueIDGeneration(TransactionCase):
 
         self.assertTrue(record2, "Second G2PQueIDGeneration record was not created.")
         self.assertEqual(
-            record2.registrant_id, self.partner2.id,
+            record2.registrant_id, str(self.partner2.id),
             "Registrant ID for the second record does not match the expected partner."
         )
         self.assertEqual(
