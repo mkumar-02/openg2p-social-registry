@@ -313,5 +313,5 @@ msgstr ""
 
 #. module: g2p_social_registry
 #: model:ir.model.constraint,message:g2p_social_registry.constraint_res_partner_ref_id_uniq
-msgid "ref_id is an unique identifier!"
+msgid "unique_id is an unique identifier!"
 msgstr ""
