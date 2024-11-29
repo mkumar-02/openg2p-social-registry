@@ -308,10 +308,10 @@ msgstr ""
 
 #. module: g2p_social_registry
 #: model:ir.model,name:g2p_social_registry.model_g2p_pending_reference_id
-msgid "g2p.pending.reference_id"
+msgid "g2p.que.id.generation"
 msgstr ""
 
 #. module: g2p_social_registry
 #: model:ir.model.constraint,message:g2p_social_registry.constraint_res_partner_ref_id_uniq
-msgid "ref_id is an unique identifier!"
+msgid "unique_id is an unique identifier!"
 msgstr ""
