@@ -14,79 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "API Timeout"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__access_token
-msgid "Access Token"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__access_token_expiry
-msgid "Access Token Expiry"
-msgstr ""
-
-#. module: g2p_social_registry
 #: model_terms:ir.actions.act_window,help:g2p_social_registry.action_region
 msgid "Add Region!"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Add registrants with missing Reference ID to the retry queue."
-msgstr ""
-
-#. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Add to Retry Queue"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__api_timeout
-msgid "Api Timeout"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__auth_client_id
-msgid "Auth Client"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Auth Client ID"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__auth_client_secret
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Auth Client Secret"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__auth_grant_type
-msgid "Auth Grant Type"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__auth_url
-msgid "Auth Url"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Authentication URL"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Base API URL"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__base_api_url
-msgid "Base Api Url"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__approved
+msgid "Approved"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -100,8 +34,8 @@ msgid "Code"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model,name:g2p_social_registry.model_res_config_settings
-msgid "Config Settings"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__completed
+msgid "Completed"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -110,46 +44,26 @@ msgid "Contact"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__create_uid
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__create_uid
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__create_uid
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__create_date
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__create_date
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__create_date
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: g2p_social_registry
-#. odoo-python
-#: code:addons/g2p_social_registry/models/res_config_settings.py:0
-#, python-format
-msgid "Database Query Error: %s"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__display_name
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__display_name
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__display_name
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_pending_reference_id__status__failed
-msgid "Failed"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model,name:g2p_social_registry.model_g2p_reference_id_config
-msgid "G2P Reference ID Configuration"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "G2P Reference ID Generator Settings"
+#: model:ir.model,name:g2p_social_registry.model_g2p_que_id_generation
+msgid "G2P Queue ID Generation"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -158,57 +72,24 @@ msgid "G2P Region"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "G2P Social Registry Settings"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.actions.server,name:g2p_social_registry.generate_ref_id
-msgid "Generate Reference ID"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__id
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__id
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__id
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__id
 msgid "ID"
 msgstr ""
 
 #. module: g2p_social_registry
-#. odoo-python
-#: code:addons/g2p_social_registry/models/ref_id_config.py:0
-#, python-format
-msgid "ID Generator Authentication URL is not set"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__id_generation_request_status
+msgid "Id Generation Request Status"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_config_settings__id_generator_api_timeout
-msgid "Id Generator Api Timeout"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__id_generation_update_status
+msgid "Id Generation Update Status"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_config_settings__id_generator_auth_client_id
-msgid "Id Generator Auth Client"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_config_settings__id_generator_auth_client_secret
-msgid "Id Generator Auth Client Secret"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_config_settings__id_generator_auth_grant_type
-msgid "Id Generator Auth Grant Type"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_config_settings__id_generator_auth_url
-msgid "Id Generator Auth Url"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_config_settings__id_generator_base_api_url
-msgid "Id Generator Base Api Url"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__in_progress
+msgid "In Progress"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -217,69 +98,71 @@ msgid "Iso Code"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__write_uid
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__write_uid
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__last_attempt_datetime_request
+msgid "Last Attempt Datetime Request"
+msgstr ""
+
+#. module: g2p_social_registry
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__last_attempt_datetime_update
+msgid "Last Attempt Datetime Update"
+msgstr ""
+
+#. module: g2p_social_registry
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__last_attempt_error_code_request
+msgid "Last Attempt Error Code Request"
+msgstr ""
+
+#. module: g2p_social_registry
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__last_attempt_error_code_update
+msgid "Last Attempt Error Code Update"
+msgstr ""
+
+#. module: g2p_social_registry
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__write_uid
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__write_date
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__write_date
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__write_date
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Manage Missing Reference ID"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_reference_id_config__name
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__name
 msgid "Name"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Provide the API Timeout"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__not_applicable
+msgid "Not Applicable"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Provide the Base API URL"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__number_of_attempts_request
+msgid "Number Of Attempts Request"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Provide the auth client id"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__number_of_attempts_update
+msgid "Number Of Attempts Update"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Provide the auth client secret"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__pending
+msgid "Pending"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
-msgid "Provide the authentication URL"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__queued_datetime
+msgid "Queued Datetime"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__ref_id
-msgid "Ref"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_partner__ref_id
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_users__ref_id
+#: model:ir.model.fields,field_description:g2p_social_registry.field_res_partner__unique_id
+#: model:ir.model.fields,field_description:g2p_social_registry.field_res_users__unique_id
 msgid "Reference ID"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.actions.server,name:g2p_social_registry.ir_cron_retry_ref_id_job_ir_actions_server
-msgid "Reference ID Generation Cron Job"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -292,26 +175,21 @@ msgid "Region"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__registrant_id
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__registrant_id
 msgid "Registrant"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_pending_reference_id__status
-msgid "Status"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__rejected
+msgid "Rejected"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_pending_reference_id__status__success
-msgid "Success"
+#: model:ir.model.constraint,message:g2p_social_registry.constraint_g2p_que_id_generation_registrant_id_uniq
+msgid "registrant_id is an unique identifier!"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model,name:g2p_social_registry.model_g2p_pending_reference_id
-msgid "g2p.pending.reference_id"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.constraint,message:g2p_social_registry.constraint_res_partner_ref_id_uniq
-msgid "ref_id is an unique identifier!"
+#: model:ir.model.constraint,message:g2p_social_registry.constraint_res_partner_unique_id_uniq
+msgid "unique_id is an unique identifier!"
 msgstr ""

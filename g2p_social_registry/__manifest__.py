@@ -15,12 +15,9 @@
     "external_dependencies": {"python": ["python-jose"]},
     "data": [
         "security/ir.model.access.csv",
-        "data/cron_job.xml",
-        "data/default_ref_id_config.xml",
         "views/main_view.xml",
         "views/region.xml",
         "views/registrant_view.xml",
-        "views/res_config_settings_view.xml",
     ],
     "assets": {},
     "demo": [],
