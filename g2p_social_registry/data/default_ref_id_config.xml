@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--
-Part of OpenG2P. See LICENSE file for full copyright and licensing details.
--->
-<odoo>
-    <record id="unique_ref_id_default_config" model="g2p.reference_id.config">
-        <field name="name">Default Reference ID Config</field>
-    </record>
-</odoo>
