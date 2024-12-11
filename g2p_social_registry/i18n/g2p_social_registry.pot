@@ -19,8 +19,9 @@ msgid "Add Region!"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__approved
-msgid "Approved"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__completed
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__completed
+msgid "COMPLETED"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -31,11 +32,6 @@ msgstr ""
 #. module: g2p_social_registry
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__code
 msgid "Code"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__completed
-msgid "Completed"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -62,6 +58,12 @@ msgid "Display Name"
 msgstr ""
 
 #. module: g2p_social_registry
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__failed
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__failed
+msgid "FAILED"
+msgstr ""
+
+#. module: g2p_social_registry
 #: model:ir.model,name:g2p_social_registry.model_g2p_que_id_generation
 msgid "G2P Queue ID Generation"
 msgstr ""
@@ -85,11 +87,6 @@ msgstr ""
 #. module: g2p_social_registry
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__id_generation_update_status
 msgid "Id Generation Update Status"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__in_progress
-msgid "In Progress"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -130,13 +127,13 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__name
-msgid "Name"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__not_applicable
+msgid "NOT_APPLICABLE"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__not_applicable
-msgid "Not Applicable"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__name
+msgid "Name"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -151,18 +148,13 @@ msgstr ""
 
 #. module: g2p_social_registry
 #: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__pending
-msgid "Pending"
+#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_update_status__pending
+msgid "PENDING"
 msgstr ""
 
 #. module: g2p_social_registry
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_que_id_generation__queued_datetime
 msgid "Queued Datetime"
-msgstr ""
-
-#. module: g2p_social_registry
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_partner__unique_id
-#: model:ir.model.fields,field_description:g2p_social_registry.field_res_users__unique_id
-msgid "Reference ID"
 msgstr ""
 
 #. module: g2p_social_registry
@@ -180,8 +172,9 @@ msgid "Registrant"
 msgstr ""
 
 #. module: g2p_social_registry
-#: model:ir.model.fields.selection,name:g2p_social_registry.selection__g2p_que_id_generation__id_generation_request_status__rejected
-msgid "Rejected"
+#: model:ir.model.fields,field_description:g2p_social_registry.field_res_partner__unique_id
+#: model:ir.model.fields,field_description:g2p_social_registry.field_res_users__unique_id
+msgid "Unique ID"
 msgstr ""
 
 #. module: g2p_social_registry
