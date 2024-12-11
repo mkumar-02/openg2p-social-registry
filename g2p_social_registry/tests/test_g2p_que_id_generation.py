@@ -13,8 +13,8 @@ class TestG2PQueIDGeneration(TransactionCase):
         self.g2p_queue = self.env["g2p.que.id.generation"].create(
             {
                 "registrant_id": self.partner1.id,
-                "id_generation_request_status": "pending",
-                "id_generation_update_status": "not_applicable",
+                "id_generation_request_status": "PENDING",
+                "id_generation_update_status": "NOT_APPLICABLE",
             }
         )
 
@@ -30,12 +30,12 @@ class TestG2PQueIDGeneration(TransactionCase):
         )
         self.assertEqual(
             self.g2p_queue.id_generation_request_status,
-            "pending",
+            "PENDING",
             "Default ID Generation Request Status should be 'pending'.",
         )
         self.assertEqual(
             self.g2p_queue.id_generation_update_status,
-            "not_applicable",
+            "NOT_APPLICABLE",
             "Default ID Generation Update Status should be 'not_applicable'.",
         )
         self.assertEqual(
@@ -69,8 +69,8 @@ class TestG2PQueIDGeneration(TransactionCase):
         record2 = self.env["g2p.que.id.generation"].create(
             {
                 "registrant_id": self.partner2.id,
-                "id_generation_request_status": "approved",
-                "id_generation_update_status": "in_progress",
+                "id_generation_request_status": "COMPLETED",
+                "id_generation_update_status": "PENDING",
                 "last_attempt_error_code_request": "ERR001",
                 "last_attempt_datetime_request": fields.Datetime.now(),
             }
@@ -84,12 +84,12 @@ class TestG2PQueIDGeneration(TransactionCase):
         )
         self.assertEqual(
             record2.id_generation_request_status,
-            "approved",
+            "COMPLETED",
             "ID Generation Request Status should be 'approved'.",
         )
         self.assertEqual(
             record2.id_generation_update_status,
-            "in_progress",
+            "PENDING",
             "ID Generation Update Status should be 'in_progress'.",
         )
 
@@ -106,20 +106,20 @@ class TestG2PQueIDGeneration(TransactionCase):
         """
         self.g2p_queue.write(
             {
-                "id_generation_request_status": "approved",
-                "id_generation_update_status": "completed",
+                "id_generation_request_status": "COMPLETED",
+                "id_generation_update_status": "COMPLETED",
                 "number_of_attempts_request": 1,
             }
         )
 
         self.assertEqual(
             self.g2p_queue.id_generation_request_status,
-            "approved",
+            "COMPLETED",
             "ID Generation Request Status should be updated to 'approved'.",
         )
         self.assertEqual(
             self.g2p_queue.id_generation_update_status,
-            "completed",
+            "COMPLETED",
             "ID Generation Update Status should be updated to 'completed'.",
         )
         self.assertEqual(
@@ -138,12 +138,12 @@ class TestG2PQueIDGeneration(TransactionCase):
 
         self.assertEqual(
             new_record.id_generation_request_status,
-            "pending",
+            "PENDING",
             "Default ID Generation Request Status should be 'pending'.",
         )
         self.assertEqual(
             new_record.id_generation_update_status,
-            "not_applicable",
+            "NOT_APPLICABLE",
             "Default ID Generation Update Status should be 'not_applicable'.",
         )
         self.assertEqual(
