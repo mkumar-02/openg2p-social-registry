@@ -31,7 +31,7 @@ class ResPartner(models.Model):
                 g2p_que_id_model.create(
                     {
                         "registrant_id": rec.id,
-                        "id_generation_request_status": "pending",
-                        "id_generation_update_status": "not_applicable",
+                        "id_generation_request_status": "PENDING",
+                        "id_generation_update_status": "NOT_APPLICABLE",
                     }
                 )
