@@ -11,22 +11,23 @@ class G2PQueIDGeneration(models.Model):
 
     id_generation_request_status = fields.Selection(
         selection=[
-            ("pending", "Pending"),
-            ("approved", "Approved"),
-            ("rejected", "Rejected"),
+            ("PENDING", "PENDING"),
+            ("COMPLETED", "COMPLETED"),
+            ("FAILED", "FAILED"),
         ],
         required=True,
-        default="pending",
+        default="PENDING",
     )
 
     id_generation_update_status = fields.Selection(
         selection=[
-            ("not_applicable", "Not Applicable"),
-            ("in_progress", "In Progress"),
-            ("completed", "Completed"),
+            ("NOT_APPLICABLE", "NOT_APPLICABLE"),
+            ("PENDING", "PENDING"),
+            ("COMPLETED", "COMPLETED"),
+            ("FAILED", "FAILED"),
         ],
         required=True,
-        default="not_applicable",
+        default="NOT_APPLICABLE",
     )
 
     queued_datetime = fields.Datetime(
