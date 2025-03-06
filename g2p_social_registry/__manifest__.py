@@ -18,7 +18,7 @@
         "views/main_view.xml",
         "views/region.xml",
         "views/registrant_view.xml",
-        "views/group_individual_search_extend.xml",
+        "views/res_config_settings_view.xml",
     ],
     "assets": {},
     "demo": [],
