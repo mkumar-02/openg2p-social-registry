@@ -54,6 +54,11 @@ msgid "G2P Region"
 msgstr ""
 
 #. module: g2p_social_registry
+#: model_terms:ir.ui.view,arch_db:g2p_social_registry.openg2p_inherit_res_config_settings_view_form
+msgid "G2P Social Registry Settings"
+msgstr ""
+
+#. module: g2p_social_registry
 #: model:ir.model.fields,field_description:g2p_social_registry.field_g2p_region__id
 msgid "ID"
 msgstr ""
