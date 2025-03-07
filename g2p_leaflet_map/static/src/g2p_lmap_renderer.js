@@ -74,27 +74,6 @@ export class G2PLeafletMapRenderer extends Component {
                     }).addTo(this.map);
 
                     bounds.extend(polygon.getBounds());
-
-                    // **Show information on hover**
-                    polygon.on("mouseover", (e) => {
-                        const popupContent = `
-                            <b>Land Information</b><br>
-                            Area: ${land.total_land_area} sq km<br>
-                            Ownership: ${land.ownership_type}
-                        `;
-                        const tooltip = L.tooltip({
-                            permanent: false,
-                            direction: "top",
-                            opacity: 0.9,
-                        })
-                            .setContent(popupContent)
-                            .setLatLng(e.latlng);
-                        polygon.bindTooltip(tooltip).openTooltip();
-                    });
-
-                    polygon.on("mouseout", () => {
-                        polygon.unbindTooltip();
-                    });
                 });
             } else {
                 console.warn("No land data received.");
