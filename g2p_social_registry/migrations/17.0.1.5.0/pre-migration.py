@@ -18,6 +18,8 @@ def migrate(cr, version):
                     SELECT id, registrant_id
                     FROM g2p_pending_reference_id
                     WHERE status = 'failed'
+                    AND registrant_id IS NOT NULL;
+
                 """
             )
             pending_records = cr.fetchall()
