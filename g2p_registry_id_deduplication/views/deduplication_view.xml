@@ -74,6 +74,7 @@
         name="Duplicates"
         parent="g2p_registry_base.g2p_main_menu_root"
         sequence="30"
+        groups="g2p_registry_base.group_g2p_admin,g2p_registry_base.group_g2p_registrar"
     />
 
     <menuitem
