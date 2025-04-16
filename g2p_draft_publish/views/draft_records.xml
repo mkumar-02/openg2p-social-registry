@@ -125,8 +125,15 @@
             <xpath expr="//notebook" position="after">
                 <footer>
                     <button class="btn btn-info" name="action_update" string="Save" type="object" />
-                    <button string="Discard" class="btn btn-warning" special="cancel" data-hotkey="x" />
-                    <button class="btn btn-success" name="action_submit" string="Submit" type="object" invisible="imported_record_state != 'draft'"/>
+                    <button string="Discard" class="btn btn-warning" special="cancel"
+                        data-hotkey="x" />
+                    <button
+                        class="btn btn-success"
+                        name="action_submit"
+                        string="Submit"
+                        type="object"
+                        invisible="imported_record_state != 'draft'"
+                    />
                     <button
                         class="btn btn-success"
                         name="action_publish"
@@ -134,7 +141,7 @@
                         type="object"
                         groups="g2p_draft_publish.group_int_approver,g2p_draft_publish.group_int_admin"
                     />
-                    <field name="imported_record_state" invisible="true"/>
+                    <field name="imported_record_state" invisible="true" />
 
                 </footer>
             </xpath>
@@ -142,8 +149,7 @@
     </record>
 
 
-
-  <record id="g2p_validation_form_view_only" model="ir.ui.view">
+    <record id="g2p_validation_form_view_only" model="ir.ui.view">
         <field name="name">Validation Form View Only</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
@@ -151,29 +157,26 @@
         <field name="arch" type="xml">
 
 
-        <xpath expr="//form" position="attributes">
-				<attribute name="edit">0</attribute>
-				<attribute name="create">0</attribute>
-        </xpath>
-
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">0</attribute>
+                <attribute name="create">0</attribute>
+            </xpath>
 
 
             <xpath expr="//notebook" position="after">
                 <footer>
-                    <button string="Discard" class="btn btn-warning" special="cancel" data-hotkey="x" />
+                    <button string="Discard" class="btn btn-warning" special="cancel"
+                        data-hotkey="x" />
                 </footer>
             </xpath>
-
-
 
 
         </field>
     </record>
 
 
-
     <record id="g2p_validation_base_tree_view" model="ir.ui.view">
-        <field name="name">Validation  Tree View</field>
+        <field name="name">Validation Tree View</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_list_tree" />
         <field name="arch" type="xml">
@@ -227,28 +230,15 @@
                 </group>
 
                 <footer>
-                    <button name="action_reject" string="Reject" class="btn btn-warning" type="object" />
+                    <button name="action_reject" string="Reject" class="btn btn-warning"
+                        type="object" />
                 </footer>
             </form>
         </field>
     </record>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <menuitem
+    <menuitem
         id="draft_publish_main_menu"
         name="Draft Publish"
         action="action_draft_imported_record"

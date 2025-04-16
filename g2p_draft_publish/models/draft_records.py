@@ -60,7 +60,7 @@ class G2PDraftRecord(models.Model):
             "addl_name": vals["addl_name"],
             "gender": vals["gender"],
             "region": vals["region"],
-            "imported_record_state": 'draft',
+            "imported_record_state": "draft",
         }
 
         if vals["phone"]:
@@ -180,7 +180,7 @@ class G2PDraftRecord(models.Model):
     def action_submit(self):
         for record in self:
             partner_data = json.loads(record.partner_data)
-            partner_data['imported_record_state'] = "submitted"
+            partner_data["imported_record_state"] = "submitted"
 
             self.write({"state": "submitted", "partner_data": json.dumps(partner_data)})
             activities = self.env["mail.activity"].search(
@@ -328,7 +328,6 @@ class G2PRespartnerIntegration(models.Model):
         ],
         default="draft",
     )
-
 
     def action_update(self):
         return
