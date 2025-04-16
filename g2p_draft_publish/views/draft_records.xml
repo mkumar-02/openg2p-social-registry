@@ -170,7 +170,6 @@
                 </footer>
             </xpath>
 
-
         </field>
     </record>
 
@@ -260,5 +259,4 @@
         action="action_draft_imported_record"
         sequence="10"
     />
-
 </odoo>
