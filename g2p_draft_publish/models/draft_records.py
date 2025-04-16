@@ -60,6 +60,7 @@ class G2PDraftRecord(models.Model):
             "addl_name": vals["addl_name"],
             "gender": vals["gender"],
             "region": vals["region"],
+            "imported_record_state": 'draft',
         }
 
         if vals["phone"]:
@@ -89,7 +90,7 @@ class G2PDraftRecord(models.Model):
         valid_data = {}
         given_name = partner_data.get("given_name", "")
         family_name = partner_data.get("family_name", "")
-        gf_name_en = partner_data.get("addl_name", "")
+        gf_name_en = partner_data.get("gf_name_en", "")
 
         self._prepare_valid_data(valid_data, fields_metadata, partner_data)
 
@@ -178,7 +179,10 @@ class G2PDraftRecord(models.Model):
 
     def action_submit(self):
         for record in self:
-            self.write({"state": "submitted"})
+            partner_data = json.loads(record.partner_data)
+            partner_data['imported_record_state'] = "submitted"
+
+            self.write({"state": "submitted", "partner_data": json.dumps(partner_data)})
             activities = self.env["mail.activity"].search(
                 [("res_model", "=", self._name), ("res_id", "in", self.ids)]
             )
@@ -221,7 +225,6 @@ class G2PDraftRecord(models.Model):
 
         _logger.info("The Additionla info")
         _logger.info(additional_g2p_info)
-
         return {
             "type": "ir.actions.act_window",
             "name": "Record Data",
@@ -315,6 +318,17 @@ class G2PRespartnerIntegration(models.Model):
     db_import = fields.Selection(
         string="Imported", index=True, selection=[("yes", "Yes"), ("no", "No")], default="no"
     )
+
+    imported_record_state = fields.Selection(
+        selection=[
+            ("draft", "Draft"),
+            ("submitted", "Submitted"),
+            ("published", "Published"),
+            ("rejected", "Rejected"),
+        ],
+        default="draft",
+    )
+
 
     def action_update(self):
         return

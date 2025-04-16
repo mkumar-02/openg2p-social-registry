@@ -113,13 +113,20 @@
         <field name="inherit_id" ref="g2p_registry_individual.view_individuals_form" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
+            <xpath expr="//button[@name='state_approve']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
 
+            <!-- Hide Reject Button -->
+            <xpath expr="//button[@name='state_reject']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
 
             <xpath expr="//notebook" position="after">
                 <footer>
                     <button class="btn btn-info" name="action_update" string="Save" type="object" />
                     <button string="Discard" class="btn btn-warning" special="cancel" data-hotkey="x" />
-                    <button class="btn btn-success" name="action_submit" string="Submit" type="object" />
+                    <button class="btn btn-success" name="action_submit" string="Submit" type="object" invisible="imported_record_state != 'draft'"/>
                     <button
                         class="btn btn-success"
                         name="action_publish"
@@ -127,6 +134,8 @@
                         type="object"
                         groups="g2p_draft_publish.group_int_approver,g2p_draft_publish.group_int_admin"
                     />
+                    <field name="imported_record_state" invisible="true"/>
+
                 </footer>
             </xpath>
         </field>
