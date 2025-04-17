@@ -114,18 +114,18 @@
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='state_approve']" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="invisible">true</attribute>
             </xpath>
-
             <!-- Hide Reject Button -->
             <xpath expr="//button[@name='state_reject']" position="attributes">
-                <attribute name="invisible">1</attribute>
+                <attribute name="invisible">true</attribute>
             </xpath>
 
             <xpath expr="//notebook" position="after">
                 <footer>
                     <button class="btn btn-info" name="action_update" string="Save" type="object" />
-                    <button string="Discard" class="btn btn-warning" special="cancel" data-hotkey="x" />
+                    <button string="Discard" class="btn btn-warning" special="cancel"
+                        data-hotkey="x" />
                     <button
                         class="btn btn-success"
                         name="action_submit"
@@ -164,7 +164,8 @@
 
             <xpath expr="//notebook" position="after">
                 <footer>
-                    <button string="Discard" class="btn btn-warning" special="cancel" data-hotkey="x" />
+                    <button string="Discard" class="btn btn-warning" special="cancel"
+                        data-hotkey="x" />
                 </footer>
             </xpath>
 
@@ -227,7 +228,8 @@
                 </group>
 
                 <footer>
-                    <button name="action_reject" string="Reject" class="btn btn-warning" type="object" />
+                    <button name="action_reject" string="Reject" class="btn btn-warning"
+                        type="object" />
                 </footer>
             </form>
         </field>
