@@ -57,7 +57,7 @@ class G2PDraftRecord(models.Model):
         partner_data = {
             "given_name": vals["given_name"],
             "family_name": vals["family_name"],
-            "addl_name": vals["addl_name"],
+            "gf_name_eng": vals["addl_name"],
             "gender": vals["gender"],
             "region": vals["region"],
             "imported_record_state": "draft",
