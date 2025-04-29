@@ -5,7 +5,7 @@
     "author": "OpenG2P",
     "website": "https://openg2p.org",
     "license": "LGPL-3",
-    "depends": ["base"],
+    "depends": ["base", "g2p_registry_individual"],
     "data": [
         "security/ir.model.access.csv",
         "views/g2p_osm_config.xml",
