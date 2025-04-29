@@ -90,13 +90,13 @@ class G2PDraftRecord(models.Model):
         valid_data = {}
         given_name = partner_data.get("given_name", "")
         family_name = partner_data.get("family_name", "")
-        gf_name_en = partner_data.get("addl_name", "")
+        addl_name = partner_data.get("addl_name", "")
 
         self._prepare_valid_data(valid_data, fields_metadata, partner_data)
 
         if valid_data:
             valid_data["db_import"] = "yes"
-            valid_data["name"] = f"{given_name} {family_name} {gf_name_en}".upper()
+            valid_data["name"] = f"{given_name} {family_name} {addl_name}".upper()
 
             res_partner_model.sudo().create(valid_data)
             self.write({"state": "published"})
