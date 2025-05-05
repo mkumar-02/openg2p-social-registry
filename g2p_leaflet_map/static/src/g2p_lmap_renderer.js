@@ -3,9 +3,13 @@
 
 import {Component, onMounted, onWillStart, useRef} from "@odoo/owl";
 import {loadCSS, loadJS} from "@web/core/assets";
+import {useService} from "@web/core/utils/hooks";
+import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog"
+
 
 export class G2PLeafletMapRenderer extends Component {
     static template = "g2p_leaflet_map.MapRenderer";
+    
     static props = {
         polygonCoords: {type: Array, optional: true, default: []},
         partnerLatitude: {type: Number, optional: true},
@@ -15,12 +19,13 @@ export class G2PLeafletMapRenderer extends Component {
     setup() {
         console.log("Renderer Props:", this.props);
         this.root = useRef("map");
-        this.config = {
-            tile_server_url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-        };
+
+        this.dialogService = useService("dialog");
+
 
         onWillStart(async () => {
             try {
+
                 const response = await fetch("/osm/config/get", {
                     method: "GET",
                     headers: {"Content-Type": "application/json"},
@@ -28,10 +33,13 @@ export class G2PLeafletMapRenderer extends Component {
 
                 if (response.ok) {
                     const data = await response.json();
-                    this.config.tile_server_url = data.tile_server_url || this.config.tile_server_url;
+                    this.tile_server_url = data?.tile_server_url 
+
                 } else {
+                    this.tile_server_url = null;
                     console.warn("Failed to fetch tile server URL, using default.");
                 }
+
 
                 await loadCSS("/g2p_leaflet_map/static/lib/leaflet/leaflet.css");
                 await loadJS("/g2p_leaflet_map/static/lib/leaflet/leaflet.js");
@@ -48,18 +56,22 @@ export class G2PLeafletMapRenderer extends Component {
                 return;
             }
 
+            if (!this.tile_server_url) {
+                // console.error("Map not JS is not loaded.");
+                return this.showDialog()
+            }
+
             const mapCenter = [9.145, 40.489];
             const zoomLevel = 12;
             this.map = L.map(this.root.el).setView(mapCenter, zoomLevel);
 
-            L.tileLayer(this.config.tile_server_url, {
+            L.tileLayer(this.tile_server_url, {
                 maxZoom: 19,
                 attribution: "&copy; OpenStreetMap contributors",
             }).addTo(this.map);
 
             const bounds = L.latLngBounds([]);
 
-            // Define a set of colors for polygons
             const colors = ["blue", "green", "red", "purple", "orange", "yellow"];
 
             // **Add Polygons from Land Data**
@@ -79,7 +91,6 @@ export class G2PLeafletMapRenderer extends Component {
                 console.warn("No land data received.");
             }
 
-            // **Fit Map to Show Everything**
             if (bounds.isValid()) {
                 this.map.fitBounds(bounds.pad(0.2));
             } else {
@@ -87,4 +98,22 @@ export class G2PLeafletMapRenderer extends Component {
             }
         });
     }
+
+
+  
+    
+
+    showDialog(){
+        const dialog = this.env.services.dialog
+        dialog.add(ConfirmationDialog, {
+            title: "Map Configuration Error",
+            body: "No Map Tile server Configuration Found!",
+           
+        })
+
+    return dialog
+
+    }
+
+
 }
