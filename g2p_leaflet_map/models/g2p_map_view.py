@@ -17,7 +17,7 @@ class ResPartnerMap(models.Model):
             "name": "Partner Map",
             "res_model": "g2p.map.view",
             "view_mode": "lmap",
-            "view_id": self.env.ref("g2p_leaflet_map.g2p_map_view_id").id,
+            "view_id": self.env.ref("g2p_leaflet_map.action_g2p_partner_map_view").id,
             "target": "new",
             "context": {
                 "partner_latitiude": self.partner_latitude,
