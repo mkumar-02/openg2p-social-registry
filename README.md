@@ -22,7 +22,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[g2p_draft_publish](g2p_draft_publish/) | 17.0.1.5.0 |  | Draft Publish Module
+[g2p_draft_publish](g2p_draft_publish/) | 17.0.1.5.0 |  | OpenG2P Draft Publish
 [g2p_leaflet_map](g2p_leaflet_map/) | 17.0.1.5.0 |  | OpenG2P Leaflet Map
 [g2p_registry_g2p_connect_rest_api](g2p_registry_g2p_connect_rest_api/) | 17.0.1.5.0 |  | OpenG2P Registry: G2P Connect REST API
 [g2p_registry_id_deduplication](g2p_registry_id_deduplication/) | 17.0.1.5.0 |  | OpenG2P Registry ID Deduplication
