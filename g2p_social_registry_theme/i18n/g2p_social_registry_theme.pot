@@ -19,6 +19,11 @@ msgid "Companies"
 msgstr ""
 
 #. module: g2p_social_registry_theme
+#: model_terms:ir.ui.view,arch_db:g2p_social_registry_theme.g2p_reset_password
+msgid "Confirm"
+msgstr ""
+
+#. module: g2p_social_registry_theme
 #: model_terms:ir.ui.view,arch_db:g2p_social_registry_theme.login
 msgid "Email / Username"
 msgstr ""
@@ -50,7 +55,7 @@ msgstr ""
 #. module: g2p_social_registry_theme
 #: model_terms:ir.ui.view,arch_db:g2p_social_registry_theme.g2p_reset_password
 #: model_terms:ir.ui.view,arch_db:g2p_social_registry_theme.login
-msgid "Logo"
+msgid "Organization Logo"
 msgstr ""
 
 #. module: g2p_social_registry_theme
