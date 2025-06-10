@@ -1,8 +1,12 @@
+# Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 {
-    "name": "Draft Publish",
+    "name": "OpenG2P Draft Publish",
+    "category": "G2P",
     "version": "17.0.0.0.0",
-    "summary": "Draft Publish  Module",
-    "category": "tools",
+    "sequence": 1,
+    "author": "OpenG2P",
+    "website": "https://openg2p.org",
+    "license": "LGPL-3",
     "depends": ["base", "mail", "g2p_social_registry", "g2p_registry_addl_info", "web"],
     "data": [
         "security/rules.xml",
@@ -19,10 +23,7 @@
             "g2p_draft_publish/static/src/**/*.xml",
         ],
     },
-    "author": "OpenG2P",
-    "website": "https://openg2p.org",
     "installable": True,
     "application": True,
     "auto_install": False,
-    "license": "",
 }

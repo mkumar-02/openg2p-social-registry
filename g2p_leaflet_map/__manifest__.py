@@ -1,8 +1,11 @@
 {
-    "name": "g2p_leaflet_map",
-    "category": "Uncategorized",
+    "name": "OpenG2P Leaflet Map",
+    "category": "G2P",
     "version": "17.0.0.0.0",
-    "depends": ["base"],
+    "author": "OpenG2P",
+    "website": "https://openg2p.org",
+    "license": "LGPL-3",
+    "depends": ["base", "g2p_registry_individual"],
     "data": [
         "security/ir.model.access.csv",
         "views/g2p_osm_config.xml",
@@ -13,10 +16,7 @@
             "g2p_leaflet_map/static/src/*",
         ]
     },
-    "author": "OpenG2P",
-    "website": "https://openg2p.org",
     "installable": True,
     "application": True,
     "auto_install": False,
-    "license": "LGPL-3",
 }

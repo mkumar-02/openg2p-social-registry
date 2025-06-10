@@ -1,1 +1,3 @@
-# g2p_ati_integrations
+# OpenG2P Draft Publish
+
+Refer to https://docs.openg2p.org.

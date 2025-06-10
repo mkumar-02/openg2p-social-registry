@@ -96,6 +96,7 @@ msgstr ""
 #. module: g2p_draft_publish
 #: model:ir.actions.act_window,name:g2p_draft_publish.action_draft_imported_record
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__draft_record__state__draft
+#: model:ir.model.fields.selection,name:g2p_draft_publish.selection__res_partner__imported_record_state__draft
 msgid "Draft"
 msgstr ""
 
@@ -197,6 +198,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_res_users__db_import
 #: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_base_tree_view
 msgid "Imported"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_res_partner__imported_record_state
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_res_users__imported_record_state
+msgid "Imported Record State"
 msgstr ""
 
 #. module: g2p_draft_publish
@@ -313,6 +320,7 @@ msgstr ""
 
 #. module: g2p_draft_publish
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__draft_record__state__published
+#: model:ir.model.fields.selection,name:g2p_draft_publish.selection__res_partner__imported_record_state__published
 msgid "Published"
 msgstr ""
 
@@ -367,6 +375,7 @@ msgstr ""
 
 #. module: g2p_draft_publish
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__draft_record__state__rejected
+#: model:ir.model.fields.selection,name:g2p_draft_publish.selection__res_partner__imported_record_state__rejected
 msgid "Rejected"
 msgstr ""
 
@@ -408,6 +417,7 @@ msgstr ""
 #. module: g2p_draft_publish
 #: model:ir.actions.act_window,name:g2p_draft_publish.action_submitted_draft_imported_record
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__draft_record__state__submitted
+#: model:ir.model.fields.selection,name:g2p_draft_publish.selection__res_partner__imported_record_state__submitted
 #: model:ir.ui.menu,name:g2p_draft_publish.menu_submitted_records
 msgid "Submitted"
 msgstr ""

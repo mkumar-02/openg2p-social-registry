@@ -5,7 +5,7 @@ class OdkImport(models.Model):
     _inherit = "odk.import"
 
     def process_records_handle_addl_data(self, mapped_json):
-        res = super().process_records_handle_addl_data(self, mapped_json)
+        res = super().process_records_handle_addl_data(mapped_json)
         # Perform additional computation with the fields
         # and update back the original mapped_json
         mapped_json.update(
