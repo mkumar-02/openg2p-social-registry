@@ -39,6 +39,22 @@ msgid "Activity Type Icon"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.actions.act_window,name:g2p_draft_publish.action_draft_group_add_members_wizard
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
+msgid "Add Group Members"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model,name:g2p_draft_publish.model_draft_group_add_members_wizard
+msgid "Add Group Members Wizard"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+msgid "Add Members"
+msgstr ""
+
+#. module: g2p_draft_publish
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__addl_name
 msgid "Addl Name"
 msgstr ""
@@ -59,6 +75,16 @@ msgid "Base"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
+msgid "Cancel"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_view_members_wizard
+msgid "Close"
+msgstr ""
+
+#. module: g2p_draft_publish
 #: model:ir.actions.act_window,name:g2p_draft_publish.reject_wizard_action
 #: model_terms:ir.ui.view,arch_db:g2p_draft_publish.reject_wizard_view
 msgid "Confirm Rejection"
@@ -70,31 +96,38 @@ msgid "Contact"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__create_uid
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__create_uid
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__create_uid
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_reject_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__create_date
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__create_date
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__create_date
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_reject_wizard__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_form_view
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_form_view_only
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_group_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_group_form_view_only
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_individual_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_individual_form_view_only
 msgid "Discard"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__display_name
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__display_name
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__display_name
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_reject_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model:ir.actions.act_window,name:g2p_draft_publish.action_draft_imported_record
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__draft_record__state__draft
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__res_partner__imported_record_state__draft
 msgid "Draft"
@@ -106,13 +139,13 @@ msgid "Draft Approver"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_form
-msgid "Draft Imported Farmer Record"
+#: model:ir.model,name:g2p_draft_publish.model_draft_group_membership_wizard_line
+msgid "Draft Group Membership Wizard Line"
 msgstr ""
 
 #. module: g2p_draft_publish
 #: model:ir.module.category,name:g2p_draft_publish.integration_module
-#: model:ir.ui.menu,name:g2p_draft_publish.draft_publish_main_menu
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_draft_root
 msgid "Draft Publish"
 msgstr ""
 
@@ -122,12 +155,13 @@ msgid "Draft Records"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model:ir.ui.menu,name:g2p_draft_publish.menu_draft_imported_farmer_record
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_draft_records
 msgid "Drafts"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_tree
 msgid "Edit"
 msgstr ""
 
@@ -152,7 +186,9 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__gender
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__gender
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
 msgid "Gender"
 msgstr ""
 
@@ -162,11 +198,41 @@ msgid "Given Name"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__group_id
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_draft_group
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_submitted_group
+msgid "Group"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.actions.act_window,name:g2p_draft_publish.action_draft_group_record
+msgid "Group Draft"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_form
+msgid "Group Draft Record"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__line_ids
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_view_members_wizard
+msgid "Group Members"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__group_member_ids_json
+msgid "Group Members (JSON)"
+msgstr ""
+
+#. module: g2p_draft_publish
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__has_message
 msgid "Has Message"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__id
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__id
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__id
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_reject_wizard__id
 msgid "ID"
@@ -196,7 +262,8 @@ msgstr ""
 #. module: g2p_draft_publish
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_res_partner__db_import
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_res_users__db_import
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_base_tree_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_base_tree_view_group
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_base_tree_view_individual
 msgid "Imported"
 msgstr ""
 
@@ -204,6 +271,22 @@ msgstr ""
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_res_partner__imported_record_state
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_res_users__imported_record_state
 msgid "Imported Record State"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_draft_individual
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_submitted_individual
+msgid "Individual"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.actions.act_window,name:g2p_draft_publish.action_draft_individual_record
+msgid "Individual Draft"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_form
+msgid "Individual Draft Record"
 msgstr ""
 
 #. module: g2p_draft_publish
@@ -219,15 +302,30 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__is_group
+msgid "Is Group"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__write_uid
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__write_uid
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__write_uid
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_reject_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_add_members_wizard__write_date
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__write_date
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__write_date
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_reject_wizard__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__member_id
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
+msgid "Member"
 msgstr ""
 
 #. module: g2p_draft_publish
@@ -246,6 +344,7 @@ msgid "My Activity Deadline"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__name
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__name
 msgid "Name"
 msgstr ""
@@ -298,7 +397,8 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_form
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_form
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_form
 msgid "Partner Data"
 msgstr ""
 
@@ -308,13 +408,17 @@ msgid "Partner Data (JSON)"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__phone
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__phone
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
 msgid "Phone"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_form_view
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_group_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_individual_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_tree
 msgid "Publish"
 msgstr ""
 
@@ -358,13 +462,16 @@ msgid "Record has been published"
 msgstr ""
 
 #. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__region
 #: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_record__region
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
 msgid "Region"
 msgstr ""
 
 #. module: g2p_draft_publish
 #: model_terms:ir.ui.view,arch_db:g2p_draft_publish.rejection_form_wizard_view
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_tree
 msgid "Reject"
 msgstr ""
 
@@ -390,7 +497,9 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_group_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_individual_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_group_add_members_wizard
 msgid "Save"
 msgstr ""
 
@@ -409,17 +518,28 @@ msgid ""
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_form_view
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_group_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.g2p_validation_individual_form_view
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_tree
 msgid "Submit"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model:ir.actions.act_window,name:g2p_draft_publish.action_submitted_draft_imported_record
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__draft_record__state__submitted
 #: model:ir.model.fields.selection,name:g2p_draft_publish.selection__res_partner__imported_record_state__submitted
-#: model:ir.ui.menu,name:g2p_draft_publish.menu_submitted_records
+#: model:ir.ui.menu,name:g2p_draft_publish.menu_submitted
 msgid "Submitted"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.actions.act_window,name:g2p_draft_publish.action_submitted_group_record
+msgid "Submitted Group"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.actions.act_window,name:g2p_draft_publish.action_submitted_individual_record
+msgid "Submitted Individual"
 msgstr ""
 
 #. module: g2p_draft_publish
@@ -438,8 +558,19 @@ msgid "User access level for  Draft Publish module"
 msgstr ""
 
 #. module: g2p_draft_publish
-#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_record_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_individual_tree
 msgid "View"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.actions.act_window,name:g2p_draft_publish.action_draft_group_view_members_wizard
+msgid "View Group Members"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model_terms:ir.ui.view,arch_db:g2p_draft_publish.view_draft_imported_group_tree
+msgid "View Members"
 msgstr ""
 
 #. module: g2p_draft_publish
@@ -450,6 +581,11 @@ msgstr ""
 #. module: g2p_draft_publish
 #: model:ir.model.fields,help:g2p_draft_publish.field_draft_record__website_message_ids
 msgid "Website communication history"
+msgstr ""
+
+#. module: g2p_draft_publish
+#: model:ir.model.fields,field_description:g2p_draft_publish.field_draft_group_membership_wizard_line__wizard_id
+msgid "Wizard"
 msgstr ""
 
 #. module: g2p_draft_publish
