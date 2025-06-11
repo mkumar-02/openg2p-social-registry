@@ -109,6 +109,6 @@ jobs:
       - name: Trigger Test Suite in Another Repo
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          token: ${{ secrets.OPENG2P_BOT_GITHUB_PAT }}
           repository: OpenG2P/openg2p-social-registry-ui-test-automation
           event-type: trigger-tests
