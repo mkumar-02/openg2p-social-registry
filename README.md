@@ -27,8 +27,6 @@ addon | version | maintainers | summary
 [g2p_registry_g2p_connect_rest_api](g2p_registry_g2p_connect_rest_api/) | 17.0.1.5.0 |  | OpenG2P Registry: G2P Connect REST API
 [g2p_registry_id_deduplication](g2p_registry_id_deduplication/) | 17.0.1.5.0 |  | OpenG2P Registry ID Deduplication
 [g2p_social_registry](g2p_social_registry/) | 17.0.1.5.0 |  | OpenG2P Social Registry
-[g2p_social_registry_all](g2p_social_registry_all/) | 17.0.1.5.0 |  | G2P Social Registry All
-[g2p_social_registry_app_filter](g2p_social_registry_app_filter/) | 17.0.1.5.0 |  | G2P Social Registry App Filter
 [g2p_social_registry_dashboard](g2p_social_registry_dashboard/) | 17.0.1.5.0 |  | OpenG2P Social Registry: Dashboard
 [g2p_social_registry_model](g2p_social_registry_model/) | 17.0.1.5.0 |  | G2P Social Registry: Demo
 [g2p_social_registry_proxy_means_test](g2p_social_registry_proxy_means_test/) | 17.0.1.5.0 |  | G2P Social Registry: PMT
