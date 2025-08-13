@@ -17,6 +17,6 @@
     ],
     "external_dependencies": {"python": ["python-jose"]},
     "application": False,
-    "auto_install": True,
+    "auto_install": False,
     "installable": True,
 }
