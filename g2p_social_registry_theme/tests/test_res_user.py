@@ -9,37 +9,38 @@ class TestResUser(TransactionCase):
         """Set up test users."""
         super().setUp()
         self.user_model = self.env["res.users"]
-        self.valid_user = self.user_model.create(
+        self.valid_user = self.user_model.with_context(default_company_id=self.env.company.id).create(
             {
                 "name": "Valid User",
                 "login": "abbb6166@gmail.com",
                 "email": "abbb6166@gmail.com",
-                "password": "admin@123",
+                "password": "Admin@123",
                 "active": True,
+                "company_id": self.env.company.id,
             }
         )
-        self.valid_user.partner_id.is_registrant = False
         user_group = self.env.ref("base.group_user")
         self.valid_user.groups_id = [(4, user_group.id)]
-        self.invalid_user = self.user_model.create(
+        self.invalid_user = self.user_model.with_context(default_company_id=self.env.company.id).create(
             {
                 "name": "Invalid User",
                 "login": "invalid_user@example.com",
                 "email": "invalid_user@example.com",
-                "password": "admin@1234",
+                "password": "Admin@123",
                 "active": True,
+                "company_id": self.env.company.id,
             }
         )
-        self.registrant_user = self.user_model.create(
+        self.registrant_user = self.user_model.with_context(default_company_id=self.env.company.id).create(
             {
                 "name": "Registrant User",
                 "login": "registrant_user@example.com",
                 "email": "registrant_user@example.com",
-                "password": "admin@123",
+                "password": "Admin@123",
                 "active": True,
+                "company_id": self.env.company.id,
             }
         )
-        self.registrant_user.partner_id.is_registrant = True
 
     def test_reset_password_invalid_user(self):
         """Test that an exception is raised when resetting password for an invalid user."""

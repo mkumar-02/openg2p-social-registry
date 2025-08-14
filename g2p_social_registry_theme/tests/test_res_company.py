@@ -12,11 +12,9 @@ class TestResCompany(TransactionCase):
 
     def test_get_g2p_favicon(self):
         """Test fetching the G2P favicon."""
-        company = self.company_model.create(
-            {
-                "name": "Test Company",
-            }
-        )
+
+        company = self.env.company
+
         favicon_base64 = company.get_g2p_favicon()
         expected_img_path = get_resource_path(
             "g2p_social_registry_theme", "static/src/img/favicon-white-background.png"
