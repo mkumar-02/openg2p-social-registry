@@ -14,7 +14,7 @@ class TestResUser(TransactionCase):
                 "name": "Valid User",
                 "login": "abbb6166@gmail.com",
                 "email": "abbb6166@gmail.com",
-                "password": "AgentUser1!",
+                "password": "admin@123",
                 "active": True,
             }
         )
@@ -26,7 +26,7 @@ class TestResUser(TransactionCase):
                 "name": "Invalid User",
                 "login": "invalid_user@example.com",
                 "email": "invalid_user@example.com",
-                "password": "AgentUser1!",
+                "password": "admin@1234",
                 "active": True,
             }
         )
@@ -35,7 +35,7 @@ class TestResUser(TransactionCase):
                 "name": "Registrant User",
                 "login": "registrant_user@example.com",
                 "email": "registrant_user@example.com",
-                "password": "AgentUser1!",
+                "password": "admin@123",
                 "active": True,
             }
         )
@@ -59,8 +59,5 @@ class TestResUser(TransactionCase):
         """Test that a registrant user is denied access."""
         with self.assertRaises(AccessDenied):
             self.registrant_user._login(
-                db="myTestDB",
-                login="registrant_user@example.com",
-                password="AgentUser1!",
-                user_agent_env=None,
+                db="myTestDB", login="registrant_user@example.com", password="admin@123", user_agent_env=None
             )
